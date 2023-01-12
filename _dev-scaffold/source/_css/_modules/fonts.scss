@@ -1,0 +1,71 @@
+@font-face {
+  font-family: "life-saver";
+  src: url("../fonts/Life_Savers/slim.LifeSavers-Regular.ttf");
+}
+
+@font-face {
+  font-family: "life-saver-bold";
+  src: url("../fonts/Life_Savers/slim.LifeSavers-Bold.ttf");
+}
+
+@font-face {
+  font-family: "OpenSans-Bold";
+  src: url("../fonts/Open_Sans/slim.OpenSans-Bold.ttf");
+}
+
+@font-face {
+  font-family: "OpenSans-Regular";
+  src: url("../fonts/Open_Sans/slim.OpenSans-Regular.ttf");
+}
+
+@font-face {
+  font-family: "OpenSans-SemiBold";
+  src: url("../fonts/Open_Sans/slim.OpenSans-SemiBold.ttf");
+}
+
+@font-face {
+  font-family: "Literata-Bold";
+  src: url("../fonts/Literata/static/Literata/slim.Literata-Bold.ttf");
+}
+
+@font-face {
+  font-family: "Literata-Regular";
+  src: url("../fonts/Literata/static/Literata/slim.Literata-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Literata-SemiBold";
+  src: url("../fonts/Literata/static/Literata/slim.Literata-SemiBold.ttf");
+}
+
+$font-sans-serif-fallback: "TIBch", "Classic Grotesque W01", "Segoe UI",
+  "Helvetica Neue", Arial, "Hiragino Sans GB", "STHeiti", "Microsoft YaHei",
+  "WenQuanYi Micro Hei", SimSun, sans-serif !important;
+
+@mixin set-font-sans-serif {
+  font-family: "OpenSans-Regular", $font-sans-serif-fallback;
+}
+
+@mixin set-font-sans-serif-semi-bold {
+  font-family: "OpenSans-SemiBold", $font-sans-serif-fallback;
+}
+
+@mixin set-font-sans-serif-bold {
+  font-family: "OpenSans-Bold", $font-sans-serif-fallback;
+}
+
+$font-serif-fallback: system-ui, Noto Sans, "AR PL Sungti", Songti, "Songti SC",
+  "Hiragino Sans GB", "STHeiti", "WenQuanYi Zen Hei", "WenQuanYi Micro Hei",
+  "Segoe UI", "Microsoft YaHei", SimSun, sans-serif !important;
+
+@mixin set-font-serif {
+  font-family: "Literata-Regular", $font-serif-fallback;
+}
+
+@mixin set-font-serif-semi-bold {
+  font-family: "Literata-SemiBold", $font-serif-fallback;
+}
+
+@mixin set-font-serif-bold {
+  font-family: "Literata-Bold", $font-serif-fallback;
+}

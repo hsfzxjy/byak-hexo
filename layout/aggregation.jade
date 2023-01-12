@@ -1,0 +1,12 @@
+extends base
+block title
+  title= page.title + " | " + config.title
+block content
+  .post
+    h2 Categories
+    .widget
+      != list_categories()
+    h2 Tags
+    != tagcloud({ min_font: 0.8, max_font: 1.2, unit: "rem" })
+    h2 RSS
+    a(href="/atom.xml") atom.xml

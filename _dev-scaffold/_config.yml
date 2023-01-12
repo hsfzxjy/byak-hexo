@@ -1,0 +1,73 @@
+language: en
+fancybox: true
+duoshuo: #duoshuo_key
+disqus: #disqus_key
+google_search: # true
+baidu_search: #baidu_search
+swiftype: #swiftype_key
+tinysou: #tinysou_key
+menu:
+  - page: home
+    directory: /
+    icon: icon-home
+    position: main
+  - page: code
+    directory: /categories/Tech/
+    icon: icon-embed2
+    position: main
+  - page: Soliloquy
+    directory: /categories/Soliloquy/
+    position: main
+    icon: icon-android
+  - page: Life
+    directory: /categories/Life/
+    position: main
+    icon: icon-leaf
+  - page: Memo
+    directory: /categories/Memo/
+    position: main
+    icon: icon-bookmarks
+  - page: Series
+    directory: /categories/Series/
+    icon: icon-books
+    position: main
+  - page: Projects
+    directory: /works/
+    icon: icon-sigma
+    position: main
+  - page: works
+    directory: /works/
+    icon: icon-sigma
+    position: optional
+  - page: archive
+    directory: /archives/
+    icon: icon-clock2
+    position: optional
+  - page: about
+    directory: /about/
+    icon: icon-wink
+    position: main
+  - page: aggregation
+    directory: /aggr/
+    icon: icon-history
+    position: optional
+  - page: blogroll
+    icon: icon-earth
+    directory: /blogroll/
+    position: optional
+  - page: rss
+    directory: /atom.xml
+    icon: icon-rss2
+    position: optional
+sections: [Tech, Life, Soliloquy, Memo, Series]
+
+beian:
+  enabled: false
+  gongan:
+    code: # 公安备案码
+    text: # 公安备案文本
+  gov:
+    text: # ICP 备案号文本
+
+gh_button:
+  username: # Github UserName

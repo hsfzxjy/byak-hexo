@@ -1,0 +1,218 @@
+include _partial/helpers
+
+if page.title
+  - var current_title = page.title
+else
+  - var current_title = config.title
+
+if (config.root != '/')
+  - var root = config.root
+else
+  - var root = ""
+
+doctype html
+
+html(lang="en")
+  head
+    meta(http-equiv="content-type", content="text/html; charset=utf-8")
+    meta(
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0",
+      name="viewport"
+    )
+    meta(content="yes", name="apple-mobile-web-app-capable")
+    meta(
+      content="black-translucent",
+      name="apple-mobile-web-app-status-bar-style"
+    )
+    meta(content="telephone=no", name="format-detection")
+    meta(name="description", content=config.description)
+    block title
+    link(rel="stylesheet", type="text/css", href=root + "/dist/css/style.css")
+    script(src=root + "/dist/js/endec.js")
+    link(rel="Shortcut Icon", type="image/x-icon", href="/favicon.ico")
+    link(rel="apple-touch-icon", href="/apple-touch-icon.png")
+    link(rel="apple-touch-icon-precomposed", href="/apple-touch-icon.png")
+    link(rel="alternate", type="application/atom+xml", href="/atom.xml")
+
+  body: .body_container
+    include _partial/totop
+
+    script.
+      if (/micromessenger/.test(navigator.userAgent.toLowerCase())) {
+        var style = document.createElement("style");
+        style.type = "text/css";
+        var text = "#header.hide-wx { display: none!important; }";
+        style.appendChild(document.createTextNode(text));
+
+        document.head.appendChild(style);
+      }
+
+    nav#header.hide-wx
+      .site-name
+        a#logo(href="/")= config.title
+      span.github-btn
+        a.gh-btn(href="#", rel="noopener noreferrer", target="_blank")
+          span.gh-ico
+          span.gh-text
+        a.gh-count(href="#", rel="noopener noreferrer", target="_blank")
+      script.
+        window.GH_BUTTON = { username: "#{theme.gh_button.username}" };
+      #nav-menu
+        span.before
+        div
+          - for (i in theme.menu)
+            if theme.menu[i].position === 'main'
+              +a_with_current(theme.menu[i].directory, __(theme.menu[i].page), theme.menu[i].icon, page)
+        span.after
+
+    #layout.pure-g
+      main#left-panel.pure-u-1: .content_container
+        block content
+
+      nav#right-panel.pure-u-1-4
+        #sidebar
+          - var serach_text = __("Search")
+          if theme.google_search
+            .widget
+              #search
+                != search_form()
+          if theme.baidu_search
+            .widget
+              form.search-form(
+                action="https://www.baidu.com/baidu",
+                method="get",
+                accept-charset="utf-8"
+              )
+                input.search-form-input(
+                  type="search",
+                  name="std",
+                  maxlength="20",
+                  placeholder="#{serach_text}"
+                )
+                input(
+                  type="hidden",
+                  name="si",
+                  value="#{config.url.replace(/^https?:\/\//, '')}"
+                )
+                input(name="tn", type="hidden", value="bds")
+                input(name="cl", type="hidden", value="3")
+                input(name="ct", type="hidden", value="2097152")
+                input(name="s", type="hidden", value="on")
+          if theme.swiftype
+            .widget
+              input.st-default-search-input(
+                placeholder="#{serach_text}",
+                type="text"
+              )
+          if theme.tinysou
+            .widget
+              form
+                input#ts-search-input.ts-search-input(
+                  placeholder="#{serach_text}",
+                  type="text"
+                )
+
+          .widget
+            .widget-title= __("nav")
+            ul
+              - for (i in theme.menu)
+                - var item = theme.menu[i]
+                  if item.position === 'optional'
+                    li
+                      a.widget-item(href="#{item.directory}")
+                        i(class=item.icon)
+                        span= __(item.page)
+          .widget
+            .widget-title= __("categories")
+            != list_categories({ show_count: true, order: -1 })
+          .widget
+            .widget-title= __("recent_tags")
+            .tagcloud
+              != tagcloud_ex({ min_font: 0.9, max_font: 0.9, amount: 40, orderby: "recent", order: -1, unit: "rem" })
+          .widget
+            .widget-title= __("recent")
+            != list_posts({ amount: 10 })
+          if theme.disqus
+            .widget
+              .widget-title= __("recent_comments")
+              #recent-comments
+                script.
+                  document.write = function (code) {
+                    document.getElementById("recent-comments").innerHTML = code;
+                  };
+                script(
+                  type="text/javascript",
+                  src="//#{theme.disqus}.disqus.com/recent_comments_widget.js?num_items=5&hide_avatars=1&avatar_size=32&excerpt_length=20&hide_mods=1",
+                  async,
+                  defer
+                )
+          if theme.links && theme.links.length
+            .widget
+              .widget-title= __("blogroll")
+              - for (var i in theme.links)
+                ul
+                  li
+                    a(
+                      href="#{theme.links[i].url}",
+                      title="#{theme.links[i].title}",
+                      target="_blank"
+                    ) #{ theme.links[i].title }
+      span.toggle-menu
+        svg(
+          viewBox="0 0 12 12",
+          version="1.1",
+          xmlns="http://www.w3.org/2000/svg"
+        )
+          line(
+            x1="1",
+            y1="11",
+            x2="11",
+            y2="1",
+            stroke="#69737d",
+            stroke-width="1"
+          )
+          line(
+            x1="1",
+            y1="1",
+            x2="11",
+            y2="11",
+            stroke="#69737d",
+            stroke-width="1"
+          )
+        span
+
+    #footer(style="text-align: center")= "© "
+      a(href="/", rel="nofollow")= config.title + "."
+      | &nbsp;Powered by&nbsp;
+      a(rel="nofollow", target="_blank", href="https://hexo.io") Hexo.
+      | &nbsp;
+      a(
+        rel="nofollow",
+        target="_blank",
+        href="https://github.com/tufu9441/maupassant-hexo"
+      ) Theme
+      | &nbsp;by&nbsp;
+      a(rel="nofollow", target="_blank", href="https://github.com/pagecho") Cho
+      | &nbsp;&amp;
+      a(rel="nofollow", target="_blank", href="https://github.com/hsfzxjy") hsfzxjy.
+      if theme.beian.enabled
+        div(stype="width:300px;margin:0 auto; padding:20px 0;")
+          a(
+            target="_blank",
+            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=#{theme.beian.gongan.code}",
+            style="display: inline-block; text-decoration: none; height: 20px; line-height: 20px"
+          )
+            img(src=root + "/img/beian.png", style="float: left")
+            span(
+              style="float: left; height: 20px; line-height: 20px; margin: 0px 0px 0px 5px; color: #939393"
+            ) #{ theme.beian.gongan.text }
+          a(
+            target="_blank",
+            style="display: inline-block; text-decoration: none; height: 20px; line-height: 20px",
+            href="http://beian.miit.gov.cn/"
+          )
+            span(
+              style="float: left; height: 20px; line-height: 20px; margin: 0px 0px 0px 5px; color: #939393"
+            ) #{ theme.beian.gov.text }
+
+  != js([root + "/dist/js/main.js"])

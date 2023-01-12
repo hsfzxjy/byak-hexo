@@ -1,0 +1,13 @@
+@use "fonts";
+
+#footer {
+    padding: 0.8em 0 3.6em;
+    margin-top: 1em;
+    line-height: 1.5;
+    color: #999;
+    @include fonts.set-font-serif;
+  
+    span {
+      font-size: 0.9em;
+    }
+  }

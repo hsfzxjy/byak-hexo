@@ -1,0 +1,54 @@
+@media print, screen and (max-width: 479px) {
+  html,
+  body {
+    font-size: 17px!important;
+  }
+  #no-comment {
+    padding: 15px 15px !important;
+    font-size: 0.7em;
+  }
+
+  .content_container {
+    padding-right: 0;
+  }
+
+  .post {
+    .post-title {
+      padding-top: 2em;
+      text-align: center;
+    }
+
+    blockquote {
+      &::before {
+        left: -12px;
+      }
+      padding-left: 1em;
+    }
+  }
+
+  figure.highlight {
+    margin: 5px -14px 5px -12px;
+    padding: 10px 0;
+
+    table td {
+      position: static;
+    }
+
+    .code pre {
+      padding: 0 10px;
+    }
+  }
+
+  div.content_container {
+    padding: 0 12px;
+  }
+
+  .post-content {
+    // margin-left: 5px;
+    margin-right: 2px;
+  }
+
+  #nav-menu {
+    font-size: 0.7rem!important;
+  }
+}

@@ -1,0 +1,88 @@
+@use "./normalize.css";
+@use "./grids-responsive-min.css";
+@use "./pure-min.css";
+
+@use "modules/fonts.scss";
+@use "modules/colors.scss";
+
+@use "../../node_modules/@fancyapps/ui/dist/fancybox.css";
+@use "../../node_modules/littlefoot/dist/littlefoot.css";
+@use "./modules/gh-button.scss";
+
+@use "modules/header.scss";
+@use "modules/sidebar.scss";
+
+@use "modules/typography.scss";
+@use "modules/encrypted.scss";
+@use "modules/page-previous-next.scss";
+
+@use "modules/footer.scss";
+
+@use "modules/archive.scss";
+
+@use "modules/media-lt-480px.scss";
+@use "modules/media-lt-720px.scss";
+@use "modules/media-lt-960px.scss";
+
+@use "modules/typography-blockquote.scss";
+@use "modules/rocket.scss";
+@use "modules/readmore.scss";
+@use "modules/code.scss";
+@use "modules/post-next-previous.scss";
+@use "modules/no-comment-box.scss";
+@use "modules/toc.scss";
+@use "modules/iconmoon.scss";
+@use "modules/highlight.scss";
+
+body {
+  background-color: colors.$bk-color;
+  color: colors.$text-color;
+  @include fonts.set-font-sans-serif;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+mjx-container.MathJax {
+  overflow-x: auto;
+  overflow-y: hidden;
+  margin: 0.5em 0 !important;
+  font-size: 0.9em;
+  font-weight: lighter;
+}
+
+body,
+html {
+  overflow-x: hidden;
+  font-size: 19px;
+}
+
+.body_container {
+  // padding: 0 80px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.content_container {
+  padding-right: 0;
+  padding: 0 80px;
+  padding-top: 20px;
+}
+
+a {
+  color: colors.$sidenav-color;
+  text-decoration: none;
+  -webkit-transition: all 0.1s ease-in;
+  -moz-transition: all 0.1s ease-in;
+  -o-transition: all 0.1s ease-in;
+  transition: all 0.1s ease-in;
+}
+
+a:hover,
+a:active {
+  color: colors.$green;
+}
+
+a:focus {
+  outline: auto;
+}

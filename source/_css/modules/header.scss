@@ -1,0 +1,104 @@
+@use "./colors.scss";
+@use "fonts";
+
+#header {
+  padding: 58px 0 0;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  position: relative;
+
+  .site-name {
+    text-align: center;
+
+    h1 {
+      padding: 0;
+      margin: 0;
+      height: 0;
+      overflow: hidden;
+    }
+
+    #logo {
+      font: bold 38px/1.12 "life-saver", "Times New Roman", Georgia, Times,
+        sans-serif !important;
+      color: #555;
+
+      display: inline-block;
+      margin-bottom: 10px;
+
+      span,
+      &:hover {
+        color: #777;
+      }
+    }
+
+    .github-btn {
+      margin: 20px 0;
+    }
+  }
+
+  #nav-menu {
+    margin: 10px 0 -1px;
+    padding: 0;
+    position: relative;
+    font-size: 0.8rem;
+
+    &.left span.before,
+    &.right span.after {
+      content: "";
+      display: block;
+      width: 3em;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+    }
+
+    & span.before {
+      left: -2px;
+      background: linear-gradient(
+        to right,
+        colors.$bk-color,
+        rgba(255, 255, 255, 0)
+      );
+    }
+
+    & span.after {
+      right: -2px;
+      background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0),
+        colors.$bk-color
+      );
+    }
+
+    & > div {
+      white-space: nowrap;
+      overflow-x: auto;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      a {
+        display: inline-block;
+        padding: 3px 20px 3px;
+        line-height: 30px;
+        color: colors.$text-color;
+        height: 27px;
+        border: 1px solid transparent;
+
+        &:hover {
+          border-bottom-color: colors.$text-color;
+        }
+
+        &.current {
+          border: 1px solid #ddd;
+          border-bottom-color: colors.$bk-color;
+        }
+
+        span {
+          margin-left: 0.5em;
+        }
+      }
+    }
+  }
+}

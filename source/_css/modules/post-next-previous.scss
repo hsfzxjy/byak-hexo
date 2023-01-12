@@ -1,0 +1,33 @@
+@use "fonts";
+
+/* post navigator*/
+.post-nav {
+  overflow: hidden;
+  margin-top: 15px;
+  margin-bottom: 20px;
+  padding: 10px;
+  white-space: nowrap;
+  border-top: 1px solid #eee;
+
+  a {
+    display: inline-block;
+    line-height: 25px;
+    @include fonts.set-font-sans-serif();
+    font-size: 0.9em;
+    color: #555;
+    border-bottom: none;
+
+    &.pre {
+      float: left;
+    }
+
+    &.next {
+      float: right;
+    }
+
+    &:hover {
+      border-bottom: none;
+      color: #222;
+    }
+  }
+}

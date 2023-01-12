@@ -1,0 +1,9 @@
+.password-box
+  form.pure-form.decryption
+    legend.header(data-hint=post.encrypted.hint) **THIS CONTENT IS ENCRYPTED**
+    fieldset
+      input(type="password", placeholder="Passphase")
+      button.pure-button.pure-button-success(type="button") Decrypt
+    legend.hint &nbsp;
+    .cover.hide
+      span DECRYPTING...

@@ -1,0 +1,44 @@
+@use "colors";
+
+$bq-text-color: colors.$text-color;
+
+blockquote code {
+  color: $bq-text-color;
+}
+
+blockquote,
+.stressed {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding-left: 1.5em;
+  color: $bq-text-color;
+  position: relative;
+
+  &::before {
+    content: "";
+    background: darken(#e6e6e6, 0%);
+    width: 0.5em;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+  }
+
+  p:last-child {
+    margin: 0 !important;
+  }
+
+  cite {
+    float: right;
+  }
+
+  p:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+  }
+}

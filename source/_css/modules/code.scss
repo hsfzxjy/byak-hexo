@@ -1,0 +1,55 @@
+@use "colors";
+
+pre *,
+code * {
+  font-family: "Input Mono", "PT Mono", Consolas, Monaco, Menlo, monospace !important;
+}
+
+code {
+  word-break: break-all;
+  text-shadow: 0 1px colors.$bk-color;
+  padding: 0 2px;
+}
+
+$hl-color: rgba(255, 255, 0, 0.4);
+$hl-text-color: darken($hl-color, 60%);
+$hl-bg-color: darken($hl-color, 20%);
+
+.highlight ._hl {
+  background-color: $hl-color;
+  margin: 0 -1em;
+  padding: 0 1em;
+
+  span._hl-label {
+    position: absolute;
+    padding: 1px 7px;
+    text-align: center;
+    height: 2em;
+    line-height: 2em;
+    right: 0;
+    color: $hl-text-color;
+    background-color: $hl-bg-color;
+  }
+}
+
+.post-content {
+  code._hl-label {
+    color: #3b3a42;
+    background-color: $hl-color;
+    text-indent: 0;
+    padding: 0 3px;
+    display: inline-block;
+  }
+
+  --blue-color: rgb(183, 233, 253);
+  --green-color: rgb(194, 231, 196);
+  --darkgreen-color: rgb(173, 192, 173);
+
+  code._hl-tag {
+    color: #3b3a42;
+    background-color: #ffeded;
+    text-indent: 0;
+    padding: 0 3px;
+    display: inline-block;
+  }
+}

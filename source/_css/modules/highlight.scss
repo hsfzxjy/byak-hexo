@@ -1,0 +1,160 @@
+@use "colors";
+
+.highlight {
+  margin: 5px 0;
+  padding: 0.9em 0;
+  overflow: auto;
+  font-size: 15px;
+  line-height: 1.6;
+
+  &::-webkit-scrollbar {
+    height: 20px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(#d6dee1, 0.7);
+    border-radius: 20px;
+    border: 6px solid transparent;
+    background-clip: content-box;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: #a8bbbf;
+  }
+}
+
+.highlight pre {
+  border: none;
+  margin: 0;
+  overflow: hidden;
+  line-height: 1.6;
+}
+
+.highlight table {
+  margin: 0;
+  width: 100%;
+  border: none;
+}
+
+.highlight table td {
+  position: relative;
+}
+
+.highlight td {
+  border: none;
+}
+
+.highlight figcaption {
+  font-size: 0.85em;
+  color: #999;
+  line-height: 1em;
+  margin-bottom: 1em;
+}
+
+.highlight figcaption:before,
+.highlight figcaption:after {
+  content: " ";
+  display: table;
+}
+
+.highlight figcaption:after {
+  clear: both;
+}
+
+.highlight figcaption a {
+  float: right;
+}
+
+.highlight .gutter pre {
+  text-align: right;
+  padding-right: 20px;
+}
+
+.highlight .line {
+  height: 20px;
+}
+
+.highlight .code pre {
+  padding: 0 1em;
+}
+
+/* Code Highlight Color Scheme */
+
+.highlight {
+  color: #383a42;
+  background: darken(colors.$bk-color, 0%);
+}
+
+pre .comment,
+pre .quote {
+  color: #a0a1a7;
+  font-style: italic;
+}
+
+pre .doctag,
+pre .keyword,
+pre .formula {
+  color: #a626a4;
+}
+
+pre .section,
+pre .name,
+pre .selector-tag,
+pre .deletion,
+pre .subst {
+  color: #e45649;
+}
+
+pre .literal {
+  color: #0184bb;
+}
+
+pre .string,
+pre .regexp,
+pre .addition,
+pre .attribute,
+pre .meta-string {
+  color: #50a14f;
+}
+
+pre .attr,
+pre .variable,
+pre .template-variable,
+pre .type,
+pre .selector-class,
+pre .selector-attr,
+pre .selector-pseudo,
+pre .number {
+  color: #986801;
+}
+
+pre .symbol,
+pre .bullet,
+pre .link,
+pre .meta,
+pre .selector-id,
+pre .title {
+  color: #4078f2;
+}
+
+pre .built_in,
+pre .title.class_,
+pre .class pre .title {
+  color: #c18401;
+}
+
+pre .emphasis {
+  font-style: italic;
+}
+
+pre .strong {
+  font-weight: bold;
+}
+
+pre .link {
+  text-decoration: underline;
+}

@@ -1,0 +1,11 @@
+extends base
+block title
+  title= page.title || page.page_title + " | " + config.title
+block content
+  .post
+    if !page.no_title
+      h1.post-title= page.title
+    .post-content
+      != page.content
+  if page.comments
+    include _partial/comments

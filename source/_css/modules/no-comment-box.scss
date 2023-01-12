@@ -1,0 +1,29 @@
+@use "fonts";
+@use "colors";
+
+#no-comment {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 2.5em 0;
+  padding: 20px 30px;
+  color: #555;
+  border: dashed darken(colors.$bk-color, 30%) 1px;
+  @include fonts.set-font-serif;
+  display: block;
+
+  h2 {
+    text-align: center;
+  }
+
+  span {
+    display: block;
+    line-height: 1.5;
+    // text-align: center;
+  }
+
+  display: none;
+
+  &.show {
+    display: block;
+  }
+}

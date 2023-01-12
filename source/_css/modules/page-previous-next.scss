@@ -1,0 +1,27 @@
+.page-navigator {
+  border-top: 1px solid #ddd;
+  list-style: none;
+  margin-top: 25px;
+  padding: 25px 0;
+  font-size: 14px;
+
+  a {
+    display: inline-block;
+    height: 25px;
+    line-height: 25px;
+    padding: 5px 20px;
+    border: 1px solid #ddd;
+
+    &.pre {
+      float: left;
+    }
+
+    &.next {
+      float: right;
+    }
+
+    &:hover {
+      border-color: #999;
+    }
+  }
+}
