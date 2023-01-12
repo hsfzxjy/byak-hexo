@@ -4,7 +4,6 @@ const fs = require("fs")
 const fancy_log = require("fancy-log")
 const fetch = require("node-fetch")
 const unzipper = require("unzipper")
-const Zip = require("adm-zip")
 
 /* Scaffold Tasks */
 
