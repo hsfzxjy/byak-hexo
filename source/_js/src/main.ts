@@ -1,6 +1,11 @@
 declare global {
   interface Window {
     msCrypto: Crypto
+    ENDEC: {
+      decryptEager: ($el: HTMLElement, kind: string) => void
+      onCleartext: (fn: ($el: HTMLElement) => any) => void
+    }
+    MathJax: any
   }
 
   interface Crypto {
@@ -8,11 +13,11 @@ declare global {
   }
 }
 
-import "./totop"
 import "./gh-buttons"
 import "./mathjax"
-import "./fancybox"
 import "./littlefoot"
 import "./sidebar"
 import "./totop"
 import "./weixin"
+import "./toc"
+import "./codex"

@@ -11,7 +11,7 @@ block content
         span.categories
           each category in page.categories.toArray()
             a(href=url_for(category.path))= " " + __(category.name)
-    div(class="post-content " + page.extra_classes.join(" "), lang="en")
+    div(class=["post-content", ...page.extra_classes].join(" "), lang="en")
       != page.encrypted ? page.encrypted.composedContent : page.content
       - post = page
       if page.encrypted
@@ -19,7 +19,7 @@ block content
         script.
           var current_tag = document.currentScript;
           var kind = "#{page.encrypted.kind}";
-          window.ENDEC.tryDecryptNode(current_tag.parentElement, kind);
+          window.ENDEC.decryptEager(current_tag.parentElement, kind);
       if page.cc === "zh"
         br
         blockquote
@@ -67,3 +67,8 @@ block content
           .ds-share-icons-more
 
     include _partial/comments
+    if !page.encrypted && page.toc
+      #toc
+        .toc-toggler
+        .toc-content
+          != toc(page.content)

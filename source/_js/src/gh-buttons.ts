@@ -1,5 +1,5 @@
 // Add commas to numbers
-function addCommas(n) {
+function addCommas(n: number) {
   return String(n).replace(/(\d)(?=(\d{3})+$)/g, "$1,")
 }
 
@@ -50,7 +50,7 @@ const API_URL = "https://api.github.com/"
 const REPO_URL = `${GITHUB_URL + user}/${repo}`
 const USER_REPO = `${user}/${repo}`
 
-function onData(obj) {
+function onData(obj: any) {
   switch (type) {
     case "watch": {
       if (v === "2") {

@@ -118,7 +118,7 @@
   b,
   strong {
     font-weight: 700;
-    @include fonts.set-font-serif-bold;
+    @include fonts.set-font-serif-semi-bold;
   }
 
   p,
@@ -149,25 +149,25 @@
   h3 {
     font-size: 1.25em;
     margin: 0.2em 0;
-    font-weight: normal;
+    // font-weight: normal;
   }
 
   h4 {
     font-size: 1.15em;
     margin: 0.15em 0;
-    font-weight: normal;
+    // font-weight: normal;
   }
 
   h5 {
     font-size: 1.1em;
     margin: 0.12em 0;
-    font-weight: normal;
+    // font-weight: normal;
   }
 
   h6 {
     font-size: 1.05em;
     margin: 0.1em 0;
-    font-weight: normal;
+    // font-weight: normal;
   }
 }
 
@@ -251,7 +251,7 @@
 
 /* Styling <hr> */
 .post .post-content hr {
-  margin: 1em auto;
+  margin: 1.5em auto;
   border: none;
   border-top: 1px solid darken(#eee, 4%);
   position: relative;
@@ -271,7 +271,7 @@
 .post .post-content {
   ul,
   ol {
-    padding: 0em 0 0 1em;
+    // padding: 0em 0 0 1em;
     margin: 0;
     overflow-y: hidden;
     overflow-x: auto;
@@ -352,7 +352,13 @@
     svg {
       display: block;
       * {
+        font-weight: 700;
         font-family: life-saver-bold;
+      }
+
+      .bold {
+        font-weight: 800;
+        font-family: life-saver-extra-bold;
       }
     }
   }

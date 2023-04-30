@@ -1,0 +1,14 @@
+.post-content {
+  p {
+    &.nomargin {
+      margin-top: 0.5em;
+    }
+    &.noindent {
+      text-indent: 0;
+    }
+    &.par {
+      margin-top: 0;
+      text-indent: 0;
+    }
+  }
+}

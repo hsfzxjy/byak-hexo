@@ -1,8 +1,21 @@
 @use "colors";
 
-pre *,
+code,
 code * {
-  font-family: "Input Mono", "PT Mono", Consolas, Monaco, Menlo, monospace !important;
+  font-weight: 500;
+  font-family: "Byak Mono Medium", "Input Mono", "PT Mono", Consolas, Monaco,
+    Menlo, monospace !important;
+}
+
+pre,
+pre * {
+  font-weight: 500;
+  font-family: "Byak Mono Medium", "Input Mono", "PT Mono", Consolas, Monaco,
+    Menlo, monospace !important;
+}
+
+pre {
+  margin: 0;
 }
 
 code {
@@ -14,23 +27,6 @@ code {
 $hl-color: rgba(255, 255, 0, 0.4);
 $hl-text-color: darken($hl-color, 60%);
 $hl-bg-color: darken($hl-color, 20%);
-
-.highlight ._hl {
-  background-color: $hl-color;
-  margin: 0 -1em;
-  padding: 0 1em;
-
-  span._hl-label {
-    position: absolute;
-    padding: 1px 7px;
-    text-align: center;
-    height: 2em;
-    line-height: 2em;
-    right: 0;
-    color: $hl-text-color;
-    background-color: $hl-bg-color;
-  }
-}
 
 .post-content {
   code._hl-label {

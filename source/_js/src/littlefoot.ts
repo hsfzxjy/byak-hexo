@@ -1,11 +1,10 @@
-import littlefoot from "../../../node_modules/littlefoot"
-import * as util from "./util"
+// eslint-disable-next-line import/no-named-as-default
+import littlefoot from "littlefoot"
 
-util.docReady(() => {
+window.ENDEC.onCleartext(($el) => {
+  const id = Math.random().toString()
+  $el.setAttribute("data-xxid", id)
   littlefoot({
-    footnoteSelector: "span",
+    scope: `[data-xxid="${id}"]`,
   })
-  document
-    .querySelectorAll(".footnote-print-only")
-    .forEach((el) => el.classList.remove("footnote-print-only"))
 })

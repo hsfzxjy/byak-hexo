@@ -5,7 +5,6 @@
 @use "modules/fonts.scss";
 @use "modules/colors.scss";
 
-@use "../../node_modules/@fancyapps/ui/dist/fancybox.css";
 @use "../../node_modules/littlefoot/dist/littlefoot.css";
 @use "./modules/gh-button.scss";
 
@@ -13,6 +12,9 @@
 @use "modules/sidebar.scss";
 
 @use "modules/typography.scss";
+@use "modules/typography-blockquote.scss";
+@use "modules/typography-custom.scss";
+
 @use "modules/encrypted.scss";
 @use "modules/page-previous-next.scss";
 
@@ -20,11 +22,8 @@
 
 @use "modules/archive.scss";
 
-@use "modules/media-lt-480px.scss";
-@use "modules/media-lt-720px.scss";
-@use "modules/media-lt-960px.scss";
+@use "modules/links.scss";
 
-@use "modules/typography-blockquote.scss";
 @use "modules/rocket.scss";
 @use "modules/readmore.scss";
 @use "modules/code.scss";
@@ -33,6 +32,11 @@
 @use "modules/toc.scss";
 @use "modules/iconmoon.scss";
 @use "modules/highlight.scss";
+@use "modules/gk-code.scss";
+
+@use "modules/media-lt-480px.scss";
+@use "modules/media-lt-720px.scss";
+@use "modules/media-lt-960px.scss";
 
 body {
   background-color: colors.$bk-color;

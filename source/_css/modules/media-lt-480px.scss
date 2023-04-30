@@ -1,7 +1,7 @@
 @media print, screen and (max-width: 479px) {
   html,
   body {
-    font-size: 17px!important;
+    font-size: 17px !important;
   }
   #no-comment {
     padding: 15px 15px !important;
@@ -26,16 +26,24 @@
     }
   }
 
-  figure.highlight {
-    margin: 5px -14px 5px -12px;
-    padding: 10px 0;
+  figure.gk-code {
+    margin-left: -12px;
+    margin-right: -12px;
 
-    table td {
-      position: static;
+    .gk-code-display {
+      &::-webkit-scrollbar {
+        display: none;
+      }
     }
+  }
 
-    .code pre {
-      padding: 0 10px;
+  .gk-unified-code {
+    margin-left: -12px;
+    margin-right: -12px;
+
+    .gk-code {
+      margin-left: 0;
+      margin-right: 0;
     }
   }
 
@@ -43,12 +51,15 @@
     padding: 0 12px;
   }
 
-  .post-content {
-    // margin-left: 5px;
-    margin-right: 2px;
+  #nav-menu {
+    font-size: 0.7rem !important;
   }
 
-  #nav-menu {
-    font-size: 0.7rem!important;
+  .links-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .links-description {
+    max-height: unset;
   }
 }

@@ -1,53 +1,62 @@
 @use "fonts";
 @use "colors";
 
-/* toc*/
-.toc-article {
-  border: 1px solid #bbb;
-  border-radius: 7px;
-  margin: 2em 0 0 2em;
-  padding: 0.7em;
-  //max-width: 40%;
-}
-
-.toc-title {
-  font-size: 120%;
-}
-
 #toc {
-  background-color: colors.$bk-color;
-  opacity: 0.96;
-  line-height: 1em;
   position: fixed;
-  left: 0;
-  top: 0;
+  top: 14px;
+  left: 12px;
+  font-size: 12px;
 
-  .toc {
-    display: none;
-    padding: 0;
-    margin: 0.5em;
-    line-height: 1.8em;
+  z-index: 100;
 
-    li {
-      list-style-type: none;
-    }
-  }
+  @include fonts.set-font-serif;
 
-  .toc-child {
-    margin-left: 1em;
-    padding-left: 0;
-  }
-}
-
-.widget {
-  ul {
+  ol {
     list-style: none;
     padding: 0;
+    margin: 0;
+  }
 
-    li {
-      margin: 5px 0;
-      line-height: 1.5;
-      // font-size: 14px;
+  .toc-toggler {
+    &::before {
+      content: "TOC";
+    }
+    padding: 6px 10px;
+    border: solid 1px #000;
+    display: inline-block;
+    cursor: pointer;
+    opacity: 0.15;
+    transition: opacity 0.2s;
+    background-color: rgba(colors.$bk-color, 1);
+
+    &:hover,
+    &:focus {
+      opacity: 1;
+    }
+
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  }
+
+  .toc-content {
+    font-size: 1.3em;
+    transition: transform 0.2s ease-out;
+    position: absolute;
+    width: max-content;
+    max-width: calc(100vw - 96px);
+    transform: scaleY(0);
+    transform-origin: 0 0;
+    background-color: rgba($color: colors.$bk-color, $alpha: 1);
+    border: solid 1px #000;
+    padding: 10px 12px;
+  }
+
+  &.expanded {
+    .toc-content {
+      transform: scaleY(1);
+    }
+    .toc-toggler {
+      opacity: 1;
+      border-bottom-width: 0;
     }
   }
 }

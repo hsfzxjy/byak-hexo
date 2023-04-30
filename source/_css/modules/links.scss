@@ -1,0 +1,50 @@
+@use "./fonts.scss";
+
+.links-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 10px;
+  align-items: center;
+  max-width: 100%;
+}
+
+.links-item {
+  border: 1px solid rgb(205, 203, 203);
+  padding: 10px;
+  min-width: 0;
+
+  > * {
+    word-wrap: break-word;
+  }
+
+  transition: all 0.2s;
+  &:hover {
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  }
+}
+
+.links-title {
+  display: block;
+}
+
+.links-url {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.links-description,
+.links-wrapper span.links-url a,
+span.links-url {
+  @include fonts.set-font-sans-serif;
+  font-size: smaller;
+}
+
+.links-description {
+//   max-height: 5em;
+  overflow: hidden;
+
+  transition: all 0.2s;
+  &:hover {
+    // max-height: 1000px;
+  }
+}

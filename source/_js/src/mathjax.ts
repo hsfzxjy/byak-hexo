@@ -1,4 +1,4 @@
-;(window as any).MathJax = {
+window.MathJax = {
   tex: {
     inlineMath: [["$", "$"]],
     autoload: {
@@ -26,9 +26,8 @@
   },
 }
 document.addEventListener("DOMContentLoaded", function () {
-  var script = document.createElement("script")
+  const script = document.createElement("script")
   script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-svg.js"
-  //- script.src = "/js/tex-mml-svg.js"
   script.async = true
   script.defer = true
   document.body.appendChild(script)

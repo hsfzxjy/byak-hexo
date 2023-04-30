@@ -1,8 +1,8 @@
 import * as util from "./util"
 
 util.docReady(() => {
-  const $rocket = document.getElementById("rocket")
-  const $html = document.querySelector("html")
+  const $rocket = document.getElementById("rocket")!
+  const $html = document.querySelector("html")!
 
   window.addEventListener("scroll", function () {
     $html.scrollTop > 100
