@@ -40,7 +40,7 @@
 .post {
   .post-title {
     margin: 0;
-    color: #555;
+    color: colors.$text-color;
     text-align: center;
     padding: 0;
     padding-top: 2em;
@@ -50,7 +50,7 @@
     @include fonts.set-font-sans-serif;
 
     a {
-      color: #555;
+      color: colors.$text-color;
       position: relative;
       border-bottom: 2px solid;
       border-bottom-color: transparent;
@@ -58,7 +58,7 @@
       @include fonts.set-font-sans-serif;
 
       &:hover {
-        border-bottom-color: darken(colors.$bk-color, 70%);
+        border-bottom-color: colors.$text-color;
       }
     }
   }
