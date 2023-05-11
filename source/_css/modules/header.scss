@@ -20,14 +20,14 @@
     #logo {
       font: bold 38px/1.12 "life-saver-bold", "Times New Roman", Georgia, Times,
         sans-serif !important;
-      color: #555;
+      color: colors.$text-color;
 
       display: inline-block;
       margin-bottom: 10px;
 
       span,
       &:hover {
-        color: #777;
+        color: darken(colors.$text-color, 20%);
       }
     }
 
