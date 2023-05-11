@@ -38,7 +38,7 @@ const earlierThan = async (a: string, b: string) => {
 async function subsetSingleFont(
   fontPath: string,
   force: boolean,
-  unicodeRanges: [start: number, end: number][] = [[0x20, 0x7f]]
+  unicodeRanges: [start: number, end: number][]
 ) {
   const fontDestPath = prefixBaseName(fontPath, "slim.")
 
@@ -90,7 +90,14 @@ async function runSubsetFonts(force = true) {
   const files = await glob(subsetFontGlob, {
     ignore: subsetFontGlobIgnored,
   })
-  return Promise.all(files.map((file: string) => subsetSingleFont(file, force)))
+  return Promise.all(
+    files.map((file: string) =>
+      subsetSingleFont(file, force, [
+        [0x20, 0x7f],
+        [0x2018, 0x201d],
+      ])
+    )
+  )
 }
 const subsetFonts = namedTask("build:font:subset", () => runSubsetFonts(false))
 
