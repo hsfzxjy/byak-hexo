@@ -1,17 +1,27 @@
 @use "colors";
 
 code,
-code * {
-  font-weight: 500;
-  font-family: "Byak Mono Medium", "Input Mono", "PT Mono", Consolas, Monaco,
-    Menlo, monospace !important;
-}
-
+code *,
 pre,
 pre * {
   font-weight: 500;
-  font-family: "Byak Mono Medium", "Input Mono", "PT Mono", Consolas, Monaco,
-    Menlo, monospace !important;
+  font-family: "ByakMono", "Input Mono", "PT Mono", Consolas, Monaco, Menlo,
+    monospace !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+b,
+strong,
+em {
+  code {
+    font-weight: inherit;
+    font-style: inherit;
+  }
 }
 
 pre {

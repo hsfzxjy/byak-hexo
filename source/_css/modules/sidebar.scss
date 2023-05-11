@@ -97,8 +97,8 @@ span.toggle-menu {
       margin-top: 0;
       border-bottom: 1px solid #ddd;
       display: block;
-      font-weight: normal;
-      @include fonts.set-font-sans-serif-semi-bold;
+      font-weight: 600;
+      @include fonts.set-font-sans-serif;
     }
 
     .comments-title {

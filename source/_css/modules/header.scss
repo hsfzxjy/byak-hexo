@@ -1,6 +1,7 @@
 @use "./colors.scss";
 @use "fonts";
 
+
 #header {
   padding: 58px 0 0;
   text-align: left;
@@ -18,7 +19,7 @@
     }
 
     #logo {
-      font: bold 38px/1.12 "life-saver-bold", "Times New Roman", Georgia, Times,
+      font: bold 38px/1.12 "LifeSaver", "Times New Roman", Georgia, Times,
         sans-serif !important;
       color: colors.$text-color;
 

@@ -115,17 +115,7 @@
 /* Styling font style/size/weight */
 
 .post .post-content {
-  b,
-  strong {
-    font-weight: 700;
-    @include fonts.set-font-serif-semi-bold;
-  }
-
-  p,
-  a,
-  li {
-    @include fonts.set-font-serif;
-  }
+  @include fonts.set-font-serif;
 
   h1,
   h2,
@@ -133,7 +123,7 @@
   h4,
   h5,
   h6 {
-    @include fonts.set-font-sans-serif-semi-bold;
+    @include fonts.set-font-sans-serif;
   }
 
   h1 {
@@ -353,12 +343,12 @@
       display: block;
       * {
         font-weight: 700;
-        font-family: life-saver-bold;
+        font-family: "LifeSaver";
       }
 
       .bold {
         font-weight: 800;
-        font-family: life-saver-extra-bold;
+        font-family: "LifeSaver";
       }
     }
   }
