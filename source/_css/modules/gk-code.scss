@@ -1,1 +1,6 @@
 @use "../../../node_modules/genko-markdown/web/css/codex.scss";
+@use "./colors.scss";
+
+:root {
+    --gk-background-color: #{colors.$bk-color};
+}
