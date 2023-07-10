@@ -40,7 +40,7 @@ window.ENDEC.onCleartext(($el) => {
 import { processBlocks } from "../../../node_modules/genko-markdown/web/js/codex"
 
 window.ENDEC.onCleartext(($el) => {
-  processBlocks($el, `${$el.id}-`)
+  processBlocks($el, $el.dataset.postId ? `${$el.id}-` : "")
 })
 
 // 4. Scroll to element specified by hash tag, if any
