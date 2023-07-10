@@ -1,5 +1,9 @@
 export function docReady(body: () => void) {
-  document.addEventListener("DOMContentLoaded", body)
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", body)
+  } else {
+    body()
+  }
 }
 
 export function throttle(f: (...args: any[]) => void, time: number) {
