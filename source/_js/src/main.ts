@@ -46,5 +46,9 @@ window.ENDEC.onCleartext(($el) => {
 // 4. Scroll to element specified by hash tag, if any
 window.ENDEC.onCleartext(() => {
   const blockId = location.hash.replace(/^#/, "")
-  document.getElementById(blockId)?.scrollIntoView({})
+  const $el = document.getElementById(blockId)
+  if (!$el) return
+  window.addEventListener("load", () => {
+    setTimeout(() => $el.scrollIntoView({}), 0)
+  })
 })
