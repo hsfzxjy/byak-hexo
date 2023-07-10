@@ -43,7 +43,19 @@ window.ENDEC.onCleartext(($el) => {
   processBlocks($el, $el.dataset.postId ? `${$el.id}-` : "")
 })
 
-// 4. Scroll to element specified by hash tag, if any
+// 4. Initialize heading perma-links
+window.ENDEC.onCleartext(($el) => {
+  $el.querySelectorAll("h1,h2,h3,h4,h5,h6").forEach(($h) => {
+    if (!$h.id) return
+    const $link = document.createElement("a")
+    $link.classList.add("perma-link")
+    $link.href = `#${$h.id}`
+    $link.textContent = "# "
+    $h.prepend($link)
+  })
+})
+
+// 5. Scroll to element specified by hash tag, if any
 window.ENDEC.onCleartext(() => {
   const blockId = location.hash.replace(/^#/, "")
   const $el = document.getElementById(blockId)

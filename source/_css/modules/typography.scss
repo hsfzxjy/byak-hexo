@@ -169,16 +169,26 @@
     $sharp-color: #e45649;
     h1,
     h2,
-    h3 {
-      &:before {
-        content: "# ";
-        color: $sharp-color;
+    h3,
+    h4,
+    h5,
+    h6 {
+      .perma-link {
+        color: $sharp-color !important;
         opacity: 0.5;
+
+        &:hover,
+        &:active,
+        &:focus {
+          color: $sharp-color !important;
+          border-bottom: none;
+          opacity: 1;
+        }
       }
     }
 
-    h1:before {
-      opacity: 1;
+    h1 .perma-link {
+      opacity: 0.9;
     }
   }
 }
