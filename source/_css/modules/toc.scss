@@ -20,6 +20,7 @@
   .toc-toggler {
     &::before {
       content: "TOC";
+      vertical-align: sub;
     }
     padding: 6px 10px;
     border: solid 1px #000;
