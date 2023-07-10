@@ -1,9 +1,15 @@
-const crypto = require("crypto")
+const crypto = require("node:crypto")
+const seedrandom = require("seedrandom")
 
+// DONOT FIX the misspelled "encrytion"
 const KNOWN_PREFIX = "<hexo-enhanced-encrytion></hexo-enhanced-encrytion>"
 
-function getSalt(nbytes = 16) {
-  return crypto.randomBytes(nbytes)
+function getSalt(seed, nbytes = 16) {
+  const seedPrefix = hexo.config.encryption.seed_prefix || "BYAK_RNG"
+  const rng = seedrandom(seedPrefix + seed)
+  return Buffer.from(
+    new Uint8Array(Array.from({ length: nbytes }, () => rng.int32()))
+  )
 }
 
 function encryptPost(data) {
@@ -12,7 +18,7 @@ function encryptPost(data) {
   const encryptionKind = data.encryption
   if (encryptionKind === undefined) return
 
-  const pwdCfg = hexo.config.encryption[encryptionKind]
+  const pwdCfg = hexo.config.encryption.keys[encryptionKind]
   if (pwdCfg === undefined)
     throw Error(`unknown encrytion kind ${encryptionKind}`)
 
@@ -27,8 +33,8 @@ function encryptPost(data) {
   const { password, hint } = pwdCfg
   encrypted.hint = hint
 
-  const keySalt = getSalt()
-  const ivSalt = getSalt()
+  const keySalt = getSalt(data.uid + "key", 16)
+  const ivSalt = getSalt(data.uid + "iv", 16)
   const key = crypto.pbkdf2Sync(password, keySalt, 1024, 32, "sha256")
   const iv = crypto.pbkdf2Sync(password, ivSalt, 512, 16, "sha256")
   encrypted.keySalt = keySalt.toString("base64")
