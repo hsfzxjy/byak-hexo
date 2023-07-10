@@ -47,7 +47,7 @@
     "clean": "gulp clean",
     "lint": "eslint . --ext ts",
     "fix": "eslint . --ext ts --fix",
-    "format": "prettier --config .prettierrc '**/*.ts' --write"
+    "format": "prettier --config .prettierrc '**/*.ts' '**/*.scss' --write"
   },
   "typesync": {
     "ignorePackages": [
