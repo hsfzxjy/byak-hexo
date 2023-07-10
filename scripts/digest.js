@@ -1,6 +1,6 @@
 const DIGEST_SEP = "\uFFFF\uFFFE"
 
-hexo.extend.filter.register("after_post_render", function (data) {
+function makeDigest(data) {
   const [content, digest] = data.content.split(DIGEST_SEP, 2)
   data.content = content
   if (digest) {
@@ -10,4 +10,6 @@ hexo.extend.filter.register("after_post_render", function (data) {
     data.digest = data.content
   }
   return data
-})
+}
+
+hexo.extend.filter.register("after_post_render", makeDigest, 100)
