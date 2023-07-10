@@ -18,7 +18,7 @@ each post, index in page.posts.toArray()
       .post-content
         != post.excerpt
     else if post.content
-      div(class=["post-content", ...post.extra_classes].join(" "), lang="en")
+      div(class=["post-content", ...post.extra_classes].join(" "), lang="en", data-post-id=post.uid)
         != post.encrypted ? post.encrypted.composedDigest : post.digest
         if post.encrypted
           include ./decryption
