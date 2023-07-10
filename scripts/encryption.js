@@ -51,4 +51,4 @@ function encryptPost(data) {
   data.extra_classes.push("encrypted")
 }
 
-hexo.extend.filter.register("after_post_render", encryptPost, 13)
+hexo.extend.filter.register("after_post_render", encryptPost, 102)
