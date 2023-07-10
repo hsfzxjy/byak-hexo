@@ -54,7 +54,10 @@ hexo.extend.renderer.register("md", "html", async (data) => {
 
   genko.registerPlugin(dotPlugin)
 
-  let { html, digest } = await genko.parse(data.text, { digest: true })
+  let { html, digest } = await genko.parse(data.text, {
+    digest: true,
+    marked: { mangle: false },
+  })
   if (digest) {
     html = html + DIGEST_SEP + digest
   }
