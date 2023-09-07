@@ -31,8 +31,7 @@ window.MathJax = {
 }
 document.addEventListener("DOMContentLoaded", function () {
   const script = document.createElement("script")
-  script.src =
-    "https://cdn.jsdelivr.net/npm/mathjax@4.0.0-alpha.1/es5/tex-svg.js"
+  script.src = "https://cdn.jsdelivr.net/npm/mathjax@4.0.0-beta.3/tex-svg.js"
   script.async = true
   script.defer = true
   document.body.appendChild(script)
