@@ -43,7 +43,7 @@ const downloadFont = (fontname: string) => {
   return task
 }
 
-const externalFontNames = ["Life Savers", "Open Sans", "Newsreader"]
+const externalFontNames = ["Life Savers", "Eczar", "Josefin Sans"]
 
 export const initFonts = namedTask(
   "init:font",

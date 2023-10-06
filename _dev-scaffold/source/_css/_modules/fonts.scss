@@ -37,35 +37,61 @@ $font-styles: (
   }
 }
 
+@import url("https://cdn.staticfile.org/lxgw-wenkai-screen-webfont/1.7.0/lxgwwenkaiscreenr.css");
+
+$LXGW: "LXGW Wenkai Screen R";
+
 /* Generate Life-Saver Fonts */
 @include make-font("LifeSaver", "../fonts/LifeSavers/slim.LifeSavers");
 
 /* Generate Sans-Serif Fonts */
-@include make-font(
-  "OpenSans",
-  "../fonts/Open_Sans/static/OpenSans/slim.OpenSans"
-);
 
-$font-sans-serif-fallback: "TIBch", "Classic Grotesque W01", "Segoe UI",
-  "Helvetica Neue", Arial, "Hiragino Sans GB", "STHeiti", "Microsoft YaHei",
-  "WenQuanYi Micro Hei", SimSun, sans-serif !important;
+:root {
+  --ui-text-font-fallback: Roboto, Helvetica, Tahoma, Arial, "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei",
+    "Noto Sans CJK", sans-serif;
+}
 
-@mixin set-font-sans-serif {
-  font-family: "OpenSans", $font-sans-serif-fallback;
+@font-face {
+  font-family: "ByakSansSerif";
+  src: url("../fonts/Josefin_Sans/slim.JosefinSans-VariableFont_wght.ttf")
+    format("opentype-variations");
+  font-display: swap;
+  font-weight: 400 1000;
+}
+
+@mixin set-font-ui-text {
+  font-family: "ByakSansSerif", $LXGW, var(--ui-text-font-fallback);
+}
+
+@mixin set-font-ui-text-lang-zh {
+  font-family: $LXGW, var(--body-text-font-fallback);
 }
 
 /* Generate Serif Fonts */
-@include make-font(
-  "Literata",
-  "../fonts/Literata/static/Literata/slim.Literata"
-);
 
-$font-serif-fallback: system-ui, Noto Sans, "AR PL Sungti", Songti, "Songti SC",
-  "Hiragino Sans GB", "STHeiti", "WenQuanYi Zen Hei", "WenQuanYi Micro Hei",
-  "Segoe UI", "Microsoft YaHei", SimSun, sans-serif !important;
+:root {
+  --body-text-font-fallback: Roboto, Helvetica, Tahoma, Arial, "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei",
+    "Noto Sans CJK", sans-serif;
+}
 
-@mixin set-font-serif {
-  font-family: "Literata", $font-serif-fallback;
+@font-face {
+  font-family: "ByakSerif";
+  src: url("../fonts/Eczar/slim.Eczar-VariableFont_wght.ttf")
+    format("opentype-variations");
+  font-display: swap;
+  font-weight: 100 1000;
+  font-synthesis: none;
+}
+
+@mixin set-font-body-text {
+  font-family: "ByakSerif", $LXGW, var(--body-text-font-fallback);
+  font-optical-sizing: none;
+}
+
+@mixin set-font-body-text-lang-zh {
+  font-family: $LXGW, var(--body-text-font-fallback);
 }
 
 /* Generate Monospace Fonts */
