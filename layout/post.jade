@@ -5,13 +5,13 @@ block title
 
 block content
   .post.post-page
-    h1.post-title= page.title
+    h1(class=["post-title", "lang-#{page.lang}"])= page.title
     .post-meta= page.date.format(config.date_format) + " | "
       if page.categories.length > 0
         span.categories
           each category in page.categories.toArray()
             a(href=url_for(category.path))= " " + __(category.name)
-    div(class=["post-content", ...page.extra_classes].join(" "), lang="en")
+    div(class=["post-content", "lang-#{page.lang}", ...page.extra_classes].join(" "), lang="en")
       != page.encrypted ? page.encrypted.composedContent : page.content
       - post = page
       if page.encrypted
@@ -20,20 +20,24 @@ block content
           var current_tag = document.currentScript;
           var kind = "#{page.encrypted.kind}";
           window.ENDEC.decryptEager(current_tag.parentElement, kind);
-      if page.cc === "zh"
+      if page.lang === "zh" || page.lang === undefined
         br
         blockquote
-          p.
+          p.cc.
             作者：hsfzxjy <br>
             链接：<span class="cc-link"></span><br>
-            著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
-      else if page.cc === "en"
+            许可：<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a>.<br>
+            著作权归作者所有。本文<b>不允许</b>被用作商业用途，非商业转载请注明出处。
+      else if page.lang === "en"
         br
         blockquote
-          p.
-            Authored by hsfzxjy.<br>
-            Article link at <span class="cc-link"></span>.<br>
-            All rights reserved by the author. For commercial repost, please contact the author for authorization. For non-commercial repost, please indicate the source.
+          p.cc.
+            <b>Author:</b> hsfzxjy.<br>
+            <b>Link:</b> <span class="cc-link"></span>.<br>
+            <b>License:</b> <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a>.<br>
+            All rights reserved by the author.<br>
+            Commercial use of this post in any form is <b>NOT</b> permitted.<br>
+            Non-commercial use of this post should be attributed with this block of text.
       script.
         (function () {
           var cclink = document.querySelector("span.cc-link");
