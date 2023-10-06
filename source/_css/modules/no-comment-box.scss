@@ -8,7 +8,7 @@
   padding: 20px 30px;
   color: #555;
   border: dashed darken(colors.$bk-color, 30%) 1px;
-  @include fonts.set-font-serif;
+  @include fonts.set-font-ui-text;
   display: block;
 
   h2 {

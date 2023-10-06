@@ -98,7 +98,7 @@ span.toggle-menu {
       border-bottom: 1px solid #ddd;
       display: block;
       font-weight: 600;
-      @include fonts.set-font-sans-serif;
+      @include fonts.set-font-ui-text;
     }
 
     .comments-title {
@@ -113,7 +113,7 @@ span.toggle-menu {
 
     .tagcloud {
       margin-top: 10px;
-      @include fonts.set-font-sans-serif();
+      @include fonts.set-font-ui-text();
 
       a {
         line-height: 1.8;
@@ -162,7 +162,7 @@ span.toggle-menu {
 }
 
 .category-list-count {
-  @include fonts.set-font-sans-serif;
+  @include fonts.set-font-ui-text;
   &:before {
     content: "(";
   }
@@ -175,16 +175,16 @@ span.toggle-menu {
 .category-list-link {
   color: #222;
   margin-right: 0.25em;
-  @include fonts.set-font-sans-serif();
+  @include fonts.set-font-ui-text();
 }
 
 .widget-item {
   span {
     margin-left: 0.5em;
-    @include fonts.set-font-sans-serif;
+    @include fonts.set-font-ui-text;
   }
 }
 
 .post-list-link {
-  @include fonts.set-font-sans-serif;
+  @include fonts.set-font-ui-text;
 }

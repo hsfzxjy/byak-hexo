@@ -41,7 +41,7 @@
 body {
   background-color: colors.$bk-color;
   color: colors.$text-color;
-  @include fonts.set-font-sans-serif;
+  @include fonts.set-font-ui-text;
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -57,12 +57,12 @@ mjx-container.MathJax {
 body,
 html {
   overflow-x: hidden;
-  font-size: 19px;
+  font-size: 22px;
 }
 
 .body_container {
   // padding: 0 80px;
-  max-width: 960px;
+  max-width: 1080px;
   margin: 0 auto;
 }
 
@@ -88,4 +88,8 @@ a:active {
 
 a:focus {
   outline: auto;
+}
+
+.dsq-widget-list {
+  @include fonts.set-font-ui-text;
 }

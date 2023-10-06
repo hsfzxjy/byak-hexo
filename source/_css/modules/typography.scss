@@ -47,7 +47,11 @@
     font-weight: 500;
     font-size: 2.5em;
 
-    @include fonts.set-font-sans-serif;
+    @include fonts.set-font-ui-text;
+
+    &.lang-zh {
+      @include fonts.set-font-ui-text-lang-zh;
+    }
 
     a {
       color: colors.$text-color;
@@ -55,7 +59,7 @@
       border-bottom: 2px solid;
       border-bottom-color: transparent;
 
-      @include fonts.set-font-sans-serif;
+      @include fonts.set-font-ui-text;
 
       &:hover {
         border-bottom-color: colors.$text-color;
@@ -78,10 +82,10 @@
   color: #999;
   text-align: center;
   text-indent: 0.15em;
-  @include fonts.set-font-sans-serif;
+  @include fonts.set-font-ui-text;
 
   a {
-    @include fonts.set-font-sans-serif;
+    @include fonts.set-font-ui-text;
   }
 }
 
@@ -115,7 +119,10 @@
 /* Styling font style/size/weight */
 
 .post .post-content {
-  @include fonts.set-font-serif;
+  @include fonts.set-font-body-text;
+  &.lang-zh {
+    @include fonts.set-font-body-text-lang-zh;
+  }
 
   h1,
   h2,
@@ -123,7 +130,7 @@
   h4,
   h5,
   h6 {
-    @include fonts.set-font-sans-serif;
+    @include fonts.set-font-ui-text;
   }
 
   h1 {
@@ -369,7 +376,7 @@
 .post .tags {
   margin: 1em 0;
 
-  @include fonts.set-font-sans-serif();
+  @include fonts.set-font-ui-text();
   font-size: 0.9em;
 
   a {
@@ -379,5 +386,16 @@
       content: "#";
       display: inline-block;
     }
+  }
+}
+
+/* Styling CC section */
+
+.post-content {
+  .cc {
+    b {
+      font-weight: 600;
+    }
+    @include fonts.set-font-body-text;
   }
 }
