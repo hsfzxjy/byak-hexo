@@ -71,7 +71,7 @@ async function subsetSingleFont(
 }
 
 const subsetFontGlob = src("_fonts/**/*.ttf")
-const subsetFontGlobIgnored = ["**/icomoon*", "**/*slim.*", "**/*Variable*"]
+const subsetFontGlobIgnored = ["**/icomoon*", "**/*slim.*"]
 
 async function runSubsetFonts(force = true) {
   if (!pyftsubsetAvailable) {
