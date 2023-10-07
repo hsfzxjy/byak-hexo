@@ -23,6 +23,9 @@ window.MathJax = {
   SVG: {
     fontCache: "global",
   },
+  chtml: {
+    matchFontHeight: false,
+  },
   options: {
     ignoreHtmlClass: "tex2jax_ignore",
     processHtmlClass: "tex2jax_process",
@@ -31,7 +34,7 @@ window.MathJax = {
 }
 document.addEventListener("DOMContentLoaded", function () {
   const script = document.createElement("script")
-  script.src = "https://cdn.jsdelivr.net/npm/mathjax@4.0.0-beta.3/tex-svg.js"
+  script.src = "https://cdn.jsdelivr.net/npm/mathjax@4.0.0-beta.4/tex-chtml.js"
   script.async = true
   script.defer = true
   document.body.appendChild(script)
