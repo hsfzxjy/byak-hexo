@@ -1,5 +1,6 @@
 const rHLLabelCode = /<code>@#([^`]*?)<\/code>/g
-const rHTag = /<code>@!(i?)((#[0-9a-fA-Z]{6}|%[a-z]+)\s+)?([^`]*?)<\/code>/g
+const rHTag =
+  /<code>@!(i?)((#[0-9a-fA-Z]{6}|%[a-z]+|hsl\(.+\))\s+)?([^`]*?)<\/code>/g
 
 function highlightHLLabel(data) {
   data.content = data.content
@@ -17,7 +18,7 @@ function highlightHLLabel(data) {
         $color = ""
       }
       const inlineCss = inline ? "display: inline;" : ""
-      return `<code class="_hl-tag" style="background-color: ${$color}; ${inlineCss}">${$content}</code>`
+      return `<code class="_hl-tag" style="--color: ${$color}; ${inlineCss}">${$content}</code>`
     })
 }
 

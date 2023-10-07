@@ -50,8 +50,6 @@ body {
 mjx-container.MathJax {
   overflow-x: auto;
   overflow-y: hidden;
-  font-size: 0.9em;
-  font-weight: lighter;
 }
 
 body,
@@ -92,4 +90,9 @@ a:focus {
 
 .dsq-widget-list {
   @include fonts.set-font-ui-text;
+}
+
+b,
+strong {
+  font-weight: 600;
 }

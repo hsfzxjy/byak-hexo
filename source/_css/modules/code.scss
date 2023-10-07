@@ -39,23 +39,23 @@ $hl-text-color: darken($hl-color, 60%);
 $hl-bg-color: darken($hl-color, 20%);
 
 .post-content {
-  code._hl-label {
-    color: #3b3a42;
-    background-color: $hl-color;
-    text-indent: 0;
-    padding: 0 3px;
-    display: inline-block;
-  }
-
-  --blue-color: rgb(183, 233, 253);
+  --blue-color: rgb(42, 192, 252);
   --green-color: rgb(194, 231, 196);
   --darkgreen-color: rgb(173, 192, 173);
+  --red-color: hsl(0, 100%, 50%);
 
-  code._hl-tag {
+  code._hl-tag,
+  code._hl-label {
+    --color: hsl(59, 100%, 50%);
     color: #3b3a42;
-    background-color: #ffeded;
     text-indent: 0;
     padding: 0 3px;
     display: inline-block;
+    position: relative;
+
+    text-decoration: underline;
+    text-decoration-skip-ink: none;
+    text-decoration-thickness: 5px;
+    text-decoration-color: var(--color);
   }
 }
