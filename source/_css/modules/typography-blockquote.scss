@@ -11,13 +11,15 @@ blockquote,
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   margin: 0;
-  padding-left: 1em;
+  padding: 0.5em 1em;
+  $bq-color: #d4d4d4;
   color: $bq-text-color;
   position: relative;
+  background-color: lighten($bq-color, 10%);
 
   &::before {
     content: "";
-    background: darken(#d4d4d4, 0%);
+    background: $bq-color;
     width: 0.3em;
     position: absolute;
     top: 0;
