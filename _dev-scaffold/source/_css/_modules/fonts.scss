@@ -57,6 +57,7 @@ $LXGW: "LXGW Wenkai Screen R";
   src: url("../fonts/Josefin_Sans/slim.JosefinSans-VariableFont_wght.ttf")
     format("opentype-variations");
   font-display: swap;
+  size-adjust: 110%;
   font-weight: 400 1000;
 }
 
@@ -95,7 +96,20 @@ $LXGW: "LXGW Wenkai Screen R";
 }
 
 /* Generate Monospace Fonts */
-@include make-font(
-  "ByakMono",
-  "../fonts/SourceCodePro/static/slim.SourceCodePro"
-);
+
+@font-face {
+  font-family: "ByakMono";
+  src: url("../fonts/SourceCodePro/slim.SourceCodePro-VariableFont_wght.ttf");
+  font-display: swap;
+  font-weight: 100 1000;
+  font-synthesis: none;
+}
+
+@font-face {
+  font-family: "ByakMono";
+  src: url("../fonts/SourceCodePro/slim.SourceCodePro-Italic-VariableFont_wght.ttf");
+  font-display: swap;
+  font-style: italic;
+  font-weight: 100 1000;
+  font-synthesis: none;
+}
