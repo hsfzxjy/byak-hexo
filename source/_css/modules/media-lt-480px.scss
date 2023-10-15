@@ -1,7 +1,7 @@
 @media print, screen and (max-width: 479px) {
   html,
   body {
-    font-size: 20px !important;
+    font-size: 19px !important;
   }
   #no-comment {
     padding: 15px 15px !important;
@@ -19,10 +19,8 @@
     }
 
     blockquote {
-      &::before {
-        left: -12px;
-      }
-      padding-left: 1em;
+      margin-left: -12px !important;
+      margin-right: -12px !important;
     }
   }
 
