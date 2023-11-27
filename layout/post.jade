@@ -11,7 +11,12 @@ block content
         span.categories
           each category in page.categories.toArray()
             a(href=url_for(category.path))= " " + __(category.name)
-    div(class=["post-content", "lang-#{page.lang}", ...page.extra_classes].join(" "), lang="en")
+    div(
+      class=["post-content", "lang-#{page.lang}", ...page.extra_classes].join(" "),
+      lang="en"
+    )
+      if page.discussion
+        blockquote !{ discussion_text(page.discussion, page.lang) }
       != page.encrypted ? page.encrypted.composedContent : page.content
       - post = page
       if page.encrypted
