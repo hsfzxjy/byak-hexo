@@ -56,13 +56,11 @@
     a {
       color: colors.$text-color;
       position: relative;
-      border-bottom: 2px solid;
-      border-bottom-color: transparent;
 
       @include fonts.set-font-ui-text;
 
       &:hover {
-        border-bottom-color: colors.$text-color;
+        text-decoration: underline;
       }
     }
   }
@@ -250,7 +248,7 @@
       &:hover,
       &:active {
         color: lighten(colors.$green, 3%) !important;
-        border-bottom: 1px solid lighten(colors.$green, 3%);
+        text-decoration: underline;
       }
     }
   }
