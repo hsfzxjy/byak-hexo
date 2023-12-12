@@ -10,6 +10,6 @@ docReady(() => {
   $toc
     .querySelectorAll("a")
     .forEach(($el) =>
-      $el.addEventListener("click", () => $toc.classList.remove("expanded"))
+      $el.addEventListener("click", () => $toc.classList.remove("expanded")),
     )
 })

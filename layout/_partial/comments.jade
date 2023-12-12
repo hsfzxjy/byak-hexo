@@ -1,6 +1,6 @@
 if theme.disqus
   #disqus_thread
-    #no-comment 
+    #no-comment
       h2 OOPS!
       span A comment box should be right here...
       span But it was gone due to network issues :-(
@@ -8,21 +8,21 @@ if theme.disqus
         a(href="https://disqus.com") disqus.com
         | .
     script.
-      var disqus_shortname = "#{theme.disqus}";
-      var disqus_identifier = "#{page.path}";
-      var disqus_title = '#{page.title.replace(/\u0027/g, "\\\x27")}';
-      var disqus_url = "#{config.url}/#{page.path}";
-      (function () {
-        var dsq = document.createElement("script");
-        dsq.type = "text/javascript";
-        dsq.async = true;
-        dsq.defer = true;
-        dsq.src = "https://" + disqus_shortname + ".disqus.com/embed.js";
-        (document.getElementsByTagName("body")[0] || document.getElementsByTagName("head")[0]).appendChild(dsq);
+      var disqus_shortname = "#{theme.disqus}"
+      var disqus_identifier = "#{page.path}"
+      var disqus_title = '#{page.title.replace(/\u0027/g, "\\\x27")}'
+      var disqus_url = "#{config.url}/#{page.path}"
+      ;(function () {
+        var dsq = document.createElement("script")
+        dsq.type = "text/javascript"
+        dsq.async = true
+        dsq.defer = true
+        dsq.src = "https://" + disqus_shortname + ".disqus.com/embed.js"
+        ;(document.getElementsByTagName("body")[0] || document.getElementsByTagName("head")[0]).appendChild(dsq)
         dsq.onerror = function () {
-          document.getElementById("no-comment").classList.add("show");
-        };
-      })();
+          document.getElementById("no-comment").classList.add("show")
+        }
+      })()
     script#dsq-count-scr(
       src="//#{theme.disqus}.disqus.com/count.js",
       async,

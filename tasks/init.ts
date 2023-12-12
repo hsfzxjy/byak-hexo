@@ -19,13 +19,13 @@ export const initBasic = namedTask("init:basic", () =>
           file.path = path.join(file.base, dirname, basename.replace(/^-/, ""))
           callback(null, file)
         },
-      })
+      }),
     )
     .pipe(
       gulp.dest(BYAK_DEV_DIR, {
         overwrite: false,
-      })
-    )
+      }),
+    ),
 )
 
 const downloadFont = (fontname: string) => {
@@ -36,7 +36,7 @@ const downloadFont = (fontname: string) => {
     resp.body.pipe(
       unzipper.Extract({
         path: path.join(BYAK_DEV_DIR, "source", "_fonts", dirname),
-      })
+      }),
     )
   }
   task.displayName = `download:font:${dirname}`
@@ -52,7 +52,7 @@ const externalFontNames = [
 
 export const initFonts = namedTask(
   "init:font",
-  gulp.parallel(externalFontNames.map(downloadFont))
+  gulp.parallel(externalFontNames.map(downloadFont)),
 )
 
 export const init = gulp.series(initBasic, initFonts)

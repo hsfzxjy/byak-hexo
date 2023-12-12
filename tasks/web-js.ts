@@ -7,7 +7,7 @@ type WebJSOptions = Options<GulpEsbuildOptions>
 
 function esbuildTask(
   options: WebJSOptions,
-  watchMode: boolean
+  watchMode: boolean,
 ): gulp.TaskFunction {
   return () =>
     gulp
@@ -19,7 +19,7 @@ function esbuildTask(
           minify: true,
           minifyIdentifiers: true,
           ...options.extra,
-        })
+        }),
       )
       .pipe(gulp.dest(options.outDir))
 }
@@ -32,8 +32,8 @@ export default function (options: WebJSOptions): BuildAndWatchTasks {
       gulp.watch(
         options.watchGlob,
         { ignoreInitial: false },
-        namedTask("watch:js:once", esbuildTask(options, true))
-      )
+        namedTask("watch:js:once", esbuildTask(options, true)),
+      ),
     ),
   ]
 }

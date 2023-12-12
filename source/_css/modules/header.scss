@@ -18,7 +18,11 @@
     }
 
     #logo {
-      font: bold 38px/1.12 "LifeSaver", "Times New Roman", Georgia, Times,
+      font:
+        bold 38px/1.12 "LifeSaver",
+        "Times New Roman",
+        Georgia,
+        Times,
         sans-serif !important;
       color: colors.$text-color;
 

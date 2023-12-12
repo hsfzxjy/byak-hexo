@@ -8,6 +8,7 @@
     "seedrandom": "^3.0.5"
   },
   "devDependencies": {
+    "@prettier/plugin-pug": "^3.0.0",
     "@types/escape-html": "^1.0.2",
     "@types/fancy-log": "^2.0.0",
     "@types/glob": "^8.1.0",
@@ -23,7 +24,7 @@
     "eslint-config-prettier": "^8.8.0",
     "eslint-import-resolver-typescript": "^3.5.5",
     "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-prettier": "^5.0.1",
     "eslint-plugin-simple-import-sort": "^10.0.0",
     "fancy-log": "^2.0.0",
     "glob": "^8.0.3",
@@ -34,7 +35,7 @@
     "hexo-script-reload": "file:../../../hexo-script-reload",
     "husky": "^8.0.3",
     "node-fetch": "^2.6.7",
-    "prettier": "^2.8.8",
+    "prettier": "^3.1.1",
     "rimraf": "^4.4.1",
     "sass": "^1.57.1",
     "ts-node": "^10.9.1",
@@ -47,7 +48,7 @@
     "clean": "gulp clean",
     "lint": "eslint . --ext ts",
     "fix": "eslint . --ext ts --fix",
-    "format": "prettier --config .prettierrc '**/*.ts' '**/*.scss' --write"
+    "format": "prettier --config .prettierrc '**/*.ts' '**/*.scss' '**/*.jade' --write --plugin='@prettier/plugin-pug'"
   },
   "typesync": {
     "ignorePackages": [

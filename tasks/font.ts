@@ -38,7 +38,7 @@ const earlierThan = async (a: string, b: string) => {
 async function subsetSingleFont(
   fontPath: string,
   force: boolean,
-  unicodeRanges: [start: number, end: number][]
+  unicodeRanges: [start: number, end: number][],
 ) {
   const fontDestPath = prefixBaseName(fontPath, "slim.")
 
@@ -55,7 +55,7 @@ async function subsetSingleFont(
           const code = k + start
           const hex = code.toString(16).padStart(4, "0")
           return `U+${hex}`
-        })
+        }),
       )
       .join("\n")
     await fs.writeFile(unicodesPath, unicodeSpec)
@@ -76,14 +76,14 @@ const subsetFontGlobIgnored = ["**/icomoon*", "**/*slim.*"]
 async function runSubsetFonts(force = true) {
   if (!pyftsubsetAvailable) {
     fancy_log.info(
-      "pyftsubset not available, will copy fonts instead of slimming"
+      "pyftsubset not available, will copy fonts instead of slimming",
     )
     return gulp
       .src(subsetFontGlob, { ignore: subsetFontGlobIgnored })
       .pipe(
         rename((path: any) => {
           path.basename = "slim." + path.basename
-        })
+        }),
       )
       .pipe(gulp.dest(src("_fonts")))
   }
@@ -95,8 +95,8 @@ async function runSubsetFonts(force = true) {
       subsetSingleFont(file, force, [
         [0x20, 0x7f],
         [0x2018, 0x201d],
-      ])
-    )
+      ]),
+    ),
   )
 }
 const subsetFonts = namedTask("build:font:subset", () => runSubsetFonts(false))
@@ -105,14 +105,14 @@ function watchSubsetFonts() {
   return gulp.watch(
     subsetFontGlob,
     { ignored: subsetFontGlobIgnored, ignoreInitial: false },
-    () => runSubsetFonts(false)
+    () => runSubsetFonts(false),
   )
 }
 
 const copyFontGlob = [src("_fonts/**/icomoon*"), src("_fonts/**/slim.*")]
 
 const copyFonts = namedTask("build:font:copy", () =>
-  gulp.src(copyFontGlob).pipe(gulp.dest(dist("fonts")))
+  gulp.src(copyFontGlob).pipe(gulp.dest(dist("fonts"))),
 )
 
 function watchCopyFonts() {
@@ -121,10 +121,10 @@ function watchCopyFonts() {
 
 export const watchFont = namedTask(
   "watch:font",
-  gulp.parallel(watchCopyFonts, watchSubsetFonts)
+  gulp.parallel(watchCopyFonts, watchSubsetFonts),
 )
 
 export const buildFont = namedTask(
   "build:font",
-  gulp.series(subsetFonts, copyFonts)
+  gulp.series(subsetFonts, copyFonts),
 )

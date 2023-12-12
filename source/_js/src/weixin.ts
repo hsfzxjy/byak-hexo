@@ -27,7 +27,7 @@ function autoResizeNav() {
     $navMenu.classList.toggle(
       "right",
       $navMenuContainer.scrollLeft + $navMenuContainer.clientWidth + threshold <
-        $navMenuContainer.scrollWidth
+        $navMenuContainer.scrollWidth,
     )
   }
 

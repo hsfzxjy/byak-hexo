@@ -38,12 +38,12 @@ html(lang="en")
 
     script.
       if (/micromessenger/.test(navigator.userAgent.toLowerCase())) {
-        var style = document.createElement("style");
-        style.type = "text/css";
-        var text = "#header.hide-wx { display: none!important; }";
-        style.appendChild(document.createTextNode(text));
+        var style = document.createElement("style")
+        style.type = "text/css"
+        var text = "#header.hide-wx { display: none!important; }"
+        style.appendChild(document.createTextNode(text))
 
-        document.head.appendChild(style);
+        document.head.appendChild(style)
       }
 
     nav#header.hide-wx
@@ -55,13 +55,13 @@ html(lang="en")
           span.gh-text
         a.gh-count(href="#", rel="noopener noreferrer", target="_blank")
       script.
-        window.GH_BUTTON = { username: "#{theme.gh_button.username}" };
+        window.GH_BUTTON = { username: "#{theme.gh_button.username}" }
       #nav-menu
         span.before
         div
-          - for (i in theme.menu)
-            if theme.menu[i].position === 'main'
-              +a_with_current(theme.menu[i].directory, __(theme.menu[i].page), theme.menu[i].icon, page)
+          each item in theme.menu
+            if item.position === 'main'
+              +a_with_current(item.directory, __(item.page), item.icon, page)
         span.after
 
     #layout.pure-g
@@ -114,13 +114,12 @@ html(lang="en")
           .widget
             .widget-title= __("nav")
             ul
-              - for (i in theme.menu)
-                - var item = theme.menu[i]
-                  if item.position === 'optional'
-                    li
-                      a.widget-item(href="#{item.directory}")
-                        i(class=item.icon)
-                        span= __(item.page)
+              each item in theme.menu
+                if item.position === 'optional'
+                  li
+                    a.widget-item(href="#{item.directory}")
+                      i(class=item.icon)
+                      span= __(item.page)
           .widget
             .widget-title= __("categories")
             != list_categories({ show_count: true, order: -1 })
@@ -137,8 +136,8 @@ html(lang="en")
               #recent-comments
                 script.
                   document.write = function (code) {
-                    document.getElementById("recent-comments").innerHTML = code;
-                  };
+                    document.getElementById("recent-comments").innerHTML = code
+                  }
                 script(
                   type="text/javascript",
                   src="//#{theme.disqus}.disqus.com/recent_comments_widget.js?num_items=5&hide_avatars=1&avatar_size=32&excerpt_length=20&hide_mods=1",
@@ -148,14 +147,14 @@ html(lang="en")
           if theme.links && theme.links.length
             .widget
               .widget-title= __("blogroll")
-              - for (var i in theme.links)
+              each item in theme.links
                 ul
                   li
                     a(
                       href="#{theme.links[i].url}",
                       title="#{theme.links[i].title}",
                       target="_blank"
-                    ) #{ theme.links[i].title }
+                    ) #{ item.title }
       span.toggle-menu
         svg(
           viewBox="0 0 12 12",

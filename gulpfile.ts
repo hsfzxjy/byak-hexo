@@ -7,7 +7,7 @@ import createWebJs from "./tasks/web-js"
 
 export const [buildJs, watchJs] = createWebJs({
   entryPoints: ["main", "endec", "links"].map((name) =>
-    src("_js", "src", `${name}.ts`)
+    src("_js", "src", `${name}.ts`),
   ),
   outDir: dist("js"),
   watchGlob: [

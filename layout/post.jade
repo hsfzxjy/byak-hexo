@@ -4,17 +4,17 @@ block title
   title= page.title
   - var meta = config.meta || {}
   if meta.title
-    meta(itemprop="title", content=page.title + " - "+ meta.title)
-    meta(itemprop="og:title", content=page.title + " - "+ meta.title)
+    meta(itemprop="title", content=page.title + " - " + meta.title)
+    meta(itemprop="og:title", content=page.title + " - " + meta.title)
   if meta.image
     meta(itemprop="image", content=meta.image)
     meta(itemprop="og:image", content=meta.image)
   if page.digest
-    - var digest = truncate(strip_html(page.digest), {length: 150})
+    - var digest = truncate(strip_html(page.digest), { length: 150 })
     meta(itemprop="description", content=digest)
     meta(itemprop="og:description", content=digest)
   if meta.type
-    meta(itemprop="og:type", content=meta.type)  
+    meta(itemprop="og:type", content=meta.type) 
 
 block content
   .post.post-page
@@ -35,9 +35,9 @@ block content
       if page.encrypted
         include _partial/decryption
         script.
-          var current_tag = document.currentScript;
-          var kind = "#{page.encrypted.kind}";
-          window.ENDEC.decryptEager(current_tag.parentElement, kind);
+          var current_tag = document.currentScript
+          var kind = "#{page.encrypted.kind}"
+          window.ENDEC.decryptEager(current_tag.parentElement, kind)
       if page.lang === "zh" || page.lang === undefined
         br
         blockquote
@@ -57,20 +57,15 @@ block content
             Commercial use of this post in any form is <b>NOT</b> permitted.<br>
             Non-commercial use of this post should be attributed with this block of text.
       script.
-        (function () {
-          var cclink = document.querySelector("span.cc-link");
-          if (!cclink) return;
-          cclink.innerHTML = '<a href="' + location.href + '">' + location.href + "</a>";
-        })();
+        ;(function () {
+          var cclink = document.querySelector("span.cc-link")
+          if (!cclink) return
+          cclink.innerHTML = '<a href="' + location.href + '">' + location.href + "</a>"
+        })()
     if page.tags
       .tags
         each tag in page.tags.toArray()
           a(href=url_for(tag.path))= tag.name
-    //- .post-content
-    //-     blockquote
-    //-         b.pay 觉得文章不错？那就赞赏一下吧 :-)
-    //-         br
-    //-         img.pay(src="/assets/wxqrcode.jpg")
     include _partial/post-nav
     if theme.duoshuo
       .ds-share.flat(

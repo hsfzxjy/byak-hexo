@@ -18,7 +18,7 @@ function sassTask(options: WebCssOptions): gulp.TaskFunction {
         sass({
           outputStyle: "compressed",
           ...options.extra,
-        }).on("error", sass.logError)
+        }).on("error", sass.logError),
       )
       .pipe(gulp.dest(options.outDir))
 }
@@ -31,8 +31,8 @@ export default function (options: WebCssOptions): BuildAndWatchTasks {
       gulp.watch(
         options.watchGlob,
         { ignoreInitial: false },
-        namedTask("watch:css:once", sassTask(options))
-      )
+        namedTask("watch:css:once", sassTask(options)),
+      ),
     ),
   ]
 }

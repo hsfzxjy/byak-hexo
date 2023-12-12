@@ -143,7 +143,7 @@ class EncryptedNode {
       result = await cryptoUtil.subtle.decrypt(
         algorithm,
         decryptKey,
-        content.buffer
+        content.buffer,
       )
     } catch (e) {
       console.warn(e)
@@ -188,7 +188,7 @@ class EncryptedNode {
         return
       }
       await Promise.all(
-        nodes.mapKind(kind, (node) => node.decrypt({ passphase }))
+        nodes.mapKind(kind, (node) => node.decrypt({ passphase })),
       )
       window.localStorage.setItem(`passphase-${kind}`, passphase)
       return false
@@ -240,7 +240,7 @@ namespace Base64 {
 
   export function decode(
     input: string,
-    arrayBuffer: ArrayBuffer | null = null
+    arrayBuffer: ArrayBuffer | null = null,
   ): Uint8Array {
     //get last chars to see if are valid
     input = removePaddingChars(input)
@@ -292,7 +292,7 @@ namespace cryptoUtil {
         name: "PBKDF2",
       },
       false,
-      ["deriveKey", "deriveBits"]
+      ["deriveKey", "deriveBits"],
     )
   }
 
@@ -310,7 +310,7 @@ namespace cryptoUtil {
         length: 256,
       },
       true,
-      ["decrypt"]
+      ["decrypt"],
     )
   }
 
@@ -323,7 +323,7 @@ namespace cryptoUtil {
         iterations: 512,
       },
       keyMaterial,
-      16 * 8
+      16 * 8,
     )
   }
 }

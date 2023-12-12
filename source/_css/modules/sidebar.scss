@@ -14,7 +14,9 @@
   width: 100%;
   max-width: 600px;
   overflow-y: auto;
-  transition: left 0.5s, right 0.5s;
+  transition:
+    left 0.5s,
+    right 0.5s;
   z-index: 10;
 
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
@@ -76,7 +78,10 @@ span.toggle-menu {
     display: block;
     width: 100%;
     top: 1px;
-    box-shadow: 0 2px 0 1px #69737d, 0 9px 0 1px #69737d, 0 16px 0 1px #69737d;
+    box-shadow:
+      0 2px 0 1px #69737d,
+      0 9px 0 1px #69737d,
+      0 16px 0 1px #69737d;
   }
 }
 

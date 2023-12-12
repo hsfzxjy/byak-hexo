@@ -14,7 +14,7 @@ export type Options<ExtraOptions> = {
 
 export type BuildAndWatchTasks = [
   buildTask: gulp.TaskFunction,
-  watchTask: gulp.TaskFunction
+  watchTask: gulp.TaskFunction,
 ]
 
 export const glob = promisify(glob_)

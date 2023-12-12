@@ -25,7 +25,7 @@ docReady(async () => {
       h("b", ["links-title"], title),
       siteURL && h("span", ["links-url"], "[", a("Site", siteURL), "]"),
       rssURL && h("span", ["links-url"], "[", a("Feed", rssURL), "]"),
-      description && h("div", ["links-description"], description)
+      description && h("div", ["links-description"], description),
     )
     nodesToAdd.push(node)
   }
