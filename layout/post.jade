@@ -2,6 +2,19 @@ extends base
 
 block title
   title= page.title
+  - var meta = config.meta || {}
+  if meta.title
+    meta(itemprop="title", content=page.title + " - "+ meta.title)
+    meta(itemprop="og:title", content=page.title + " - "+ meta.title)
+  if meta.image
+    meta(itemprop="image", content=meta.image)
+    meta(itemprop="og:image", content=meta.image)
+  if page.digest
+    - var digest = truncate(strip_html(page.digest), {length: 150})
+    meta(itemprop="description", content=digest)
+    meta(itemprop="og:description", content=digest)
+  if meta.type
+    meta(itemprop="og:type", content=meta.type)  
 
 block content
   .post.post-page

@@ -3,6 +3,18 @@ extends base
 
 block title
   title= config.title
+  - var meta = config.meta || {}
+  if meta.title
+    meta(itemprop="title", content=meta.title)
+    meta(itemprop="og:title", content=meta.title)
+  if meta.image
+    meta(itemprop="image", content=meta.image)
+    meta(itemprop="og:image", content=meta.image)
+  if meta.description
+    meta(itemprop="description", content=meta.description)
+    meta(itemprop="og:description", content=meta.description)
+  if meta.type
+    meta(itemprop="og:type", content=meta.type)
 block content
   include _partial/list
 
