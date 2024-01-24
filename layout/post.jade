@@ -66,6 +66,9 @@ block content
       .tags
         each tag in page.tags.toArray()
           a(href=url_for(tag.path))= tag.name
+    if page.labeleq
+      script.
+        window.__ams = "ams"
     include _partial/post-nav
     if theme.duoshuo
       .ds-share.flat(

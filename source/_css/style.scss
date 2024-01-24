@@ -47,9 +47,21 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-mjx-container.MathJax {
-  overflow-x: auto;
-  overflow-y: hidden;
+.post .post-content {
+  $mjx: "mjx-container.MathJax";
+  #{$mjx} {
+    overflow-x: auto;
+    overflow-y: hidden;
+    min-width: unset !important;
+
+    a {
+      color: colors.$text-color !important;
+    }
+  }
+
+  p:not([class]) #{$mjx} {
+    margin-top: -0.5em;
+  }
 }
 
 body,
