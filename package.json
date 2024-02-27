@@ -4,6 +4,7 @@
   "description": "Byak theme for Hexo.",
   "dependencies": {
     "genko-markdown": "file:../../../genko-markdown",
+    "highlight.js": "^11.9.0",
     "littlefoot": "^3.4.1",
     "seedrandom": "^3.0.5"
   },
