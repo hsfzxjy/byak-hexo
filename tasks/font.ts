@@ -75,9 +75,7 @@ const subsetFontGlobIgnored = ["**/icomoon*", "**/*slim.*"]
 
 async function runSubsetFonts(force = true) {
   if (!pyftsubsetAvailable) {
-    fancy_log.info(
-      "pyftsubset not available, will copy fonts instead of slimming",
-    )
+    fancy_log.info("pyftsubset not available, will copy fonts instead of slimming")
     return gulp
       .src(subsetFontGlob, { ignore: subsetFontGlobIgnored })
       .pipe(
@@ -102,10 +100,8 @@ async function runSubsetFonts(force = true) {
 const subsetFonts = namedTask("build:font:subset", () => runSubsetFonts(false))
 
 function watchSubsetFonts() {
-  return gulp.watch(
-    subsetFontGlob,
-    { ignored: subsetFontGlobIgnored, ignoreInitial: false },
-    () => runSubsetFonts(false),
+  return gulp.watch(subsetFontGlob, { ignored: subsetFontGlobIgnored, ignoreInitial: false }, () =>
+    runSubsetFonts(false),
   )
 }
 
@@ -119,12 +115,6 @@ function watchCopyFonts() {
   return gulp.watch(copyFontGlob, { ignoreInitial: false }, copyFonts)
 }
 
-export const watchFont = namedTask(
-  "watch:font",
-  gulp.parallel(watchCopyFonts, watchSubsetFonts),
-)
+export const watchFont = namedTask("watch:font", gulp.parallel(watchCopyFonts, watchSubsetFonts))
 
-export const buildFont = namedTask(
-  "build:font",
-  gulp.series(subsetFonts, copyFonts),
-)
+export const buildFont = namedTask("build:font", gulp.series(subsetFonts, copyFonts))

@@ -24,10 +24,7 @@ block content
         span.categories
           each category in page.categories.toArray()
             a(href=url_for(category.path))= " " + __(category.name)
-    div(
-      class=["post-content", "lang-#{page.lang}", ...page.extra_classes].join(" "),
-      lang="en"
-    )
+    div(class=["post-content", "lang-#{page.lang}", ...page.extra_classes].join(" "), lang="en")
       if page.discussion
         blockquote !{ discussion_text(page.discussion, page.lang) }
       != page.encrypted ? page.encrypted.composedContent : page.content
@@ -71,11 +68,7 @@ block content
         window.__ams = "ams"
     include _partial/post-nav
     if theme.duoshuo
-      .ds-share.flat(
-        data-thread-key=page.path,
-        data-title=page.title,
-        data-url=page.permalink
-      )
+      .ds-share.flat(data-thread-key=page.path, data-title=page.title, data-url=page.permalink)
         .ds-share-inline
           ul.ds-share-icons-16
             li(data-toggle="ds-share-icons-more")

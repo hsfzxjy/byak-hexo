@@ -82,10 +82,7 @@ class EncryptedNode {
     return window.localStorage.getItem(`passphase-${kind}`)
   }
 
-  decrypt(opts: {
-    kind?: string
-    passphase?: string
-  }): Promise<State.Terminal> {
+  decrypt(opts: { kind?: string; passphase?: string }): Promise<State.Terminal> {
     switch (this.state) {
       case State.decrypting:
         if (!this.promise) throw new Error("bad state")
@@ -140,11 +137,7 @@ class EncryptedNode {
       iv: iv,
     }
     try {
-      result = await cryptoUtil.subtle.decrypt(
-        algorithm,
-        decryptKey,
-        content.buffer,
-      )
+      result = await cryptoUtil.subtle.decrypt(algorithm, decryptKey, content.buffer)
     } catch (e) {
       console.warn(e)
       return State.encrypted
@@ -187,9 +180,7 @@ class EncryptedNode {
         alert("Incorrect passphase!")
         return
       }
-      await Promise.all(
-        nodes.mapKind(kind, (node) => node.decrypt({ passphase })),
-      )
+      await Promise.all(nodes.mapKind(kind, (node) => node.decrypt({ passphase })))
       window.localStorage.setItem(`passphase-${kind}`, passphase)
       return false
     }
@@ -227,8 +218,7 @@ docReady(() => {
 })
 
 namespace Base64 {
-  const _keyStr =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/="
+  const _keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/="
 
   function removePaddingChars(input: string) {
     const lkey = _keyStr.indexOf(input.charAt(input.length - 1))
@@ -238,10 +228,7 @@ namespace Base64 {
     return input
   }
 
-  export function decode(
-    input: string,
-    arrayBuffer: ArrayBuffer | null = null,
-  ): Uint8Array {
+  export function decode(input: string, arrayBuffer: ArrayBuffer | null = null): Uint8Array {
     //get last chars to see if are valid
     input = removePaddingChars(input)
     input = removePaddingChars(input)
@@ -280,8 +267,7 @@ namespace Base64 {
 namespace cryptoUtil {
   const cryptoObj: Crypto = window.crypto || window.msCrypto
   export const subtle = cryptoObj.subtle || cryptoObj.webkitSubtle
-  export const KNOWN_PREFIX =
-    "<hexo-enhanced-encrytion></hexo-enhanced-encrytion>"
+  export const KNOWN_PREFIX = "<hexo-enhanced-encrytion></hexo-enhanced-encrytion>"
 
   export function getKeyMaterial(passphase: string) {
     const encoder = new TextEncoder()

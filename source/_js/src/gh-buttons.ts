@@ -54,49 +54,31 @@ function onData(obj: any) {
   switch (type) {
     case "watch": {
       if (v === "2") {
-        counter.textContent =
-          obj.subscribers_count && addCommas(obj.subscribers_count)
-        counter.setAttribute(
-          "aria-label",
-          `${counter.textContent} watchers ${LABEL_SUFFIX}`,
-        )
+        counter.textContent = obj.subscribers_count && addCommas(obj.subscribers_count)
+        counter.setAttribute("aria-label", `${counter.textContent} watchers ${LABEL_SUFFIX}`)
       } else {
-        counter.textContent =
-          obj.stargazers_count && addCommas(obj.stargazers_count)
-        counter.setAttribute(
-          "aria-label",
-          `${counter.textContent} stargazers ${LABEL_SUFFIX}`,
-        )
+        counter.textContent = obj.stargazers_count && addCommas(obj.stargazers_count)
+        counter.setAttribute("aria-label", `${counter.textContent} stargazers ${LABEL_SUFFIX}`)
       }
 
       break
     }
 
     case "star": {
-      counter.textContent =
-        obj.stargazers_count && addCommas(obj.stargazers_count)
-      counter.setAttribute(
-        "aria-label",
-        `${counter.textContent} stargazers ${LABEL_SUFFIX}`,
-      )
+      counter.textContent = obj.stargazers_count && addCommas(obj.stargazers_count)
+      counter.setAttribute("aria-label", `${counter.textContent} stargazers ${LABEL_SUFFIX}`)
       break
     }
 
     case "fork": {
       counter.textContent = obj.network_count && addCommas(obj.network_count)
-      counter.setAttribute(
-        "aria-label",
-        `${counter.textContent} forks ${LABEL_SUFFIX}`,
-      )
+      counter.setAttribute("aria-label", `${counter.textContent} forks ${LABEL_SUFFIX}`)
       break
     }
 
     case "follow": {
       counter.textContent = obj.followers && addCommas(obj.followers)
-      counter.setAttribute(
-        "aria-label",
-        `${counter.textContent} followers ${LABEL_SUFFIX}`,
-      )
+      counter.setAttribute("aria-label", `${counter.textContent} followers ${LABEL_SUFFIX}`)
       break
     }
   }

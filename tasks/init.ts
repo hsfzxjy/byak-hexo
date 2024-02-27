@@ -43,16 +43,8 @@ const downloadFont = (fontname: string) => {
   return task
 }
 
-const externalFontNames = [
-  "Life Savers",
-  "Eczar",
-  "Josefin Sans",
-  "Source Code Pro",
-]
+const externalFontNames = ["Life Savers", "Eczar", "Josefin Sans", "Source Code Pro"]
 
-export const initFonts = namedTask(
-  "init:font",
-  gulp.parallel(externalFontNames.map(downloadFont)),
-)
+export const initFonts = namedTask("init:font", gulp.parallel(externalFontNames.map(downloadFont)))
 
 export const init = gulp.series(initBasic, initFonts)

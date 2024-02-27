@@ -58,20 +58,12 @@
 
     & span.before {
       left: -2px;
-      background: linear-gradient(
-        to right,
-        colors.$bk-color,
-        rgba(255, 255, 255, 0)
-      );
+      background: linear-gradient(to right, colors.$bk-color, rgba(255, 255, 255, 0));
     }
 
     & span.after {
       right: -2px;
-      background: linear-gradient(
-        to right,
-        rgba(255, 255, 255, 0),
-        colors.$bk-color
-      );
+      background: linear-gradient(to right, rgba(255, 255, 255, 0), colors.$bk-color);
     }
 
     & > div {

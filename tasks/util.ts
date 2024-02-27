@@ -12,10 +12,7 @@ export type Options<ExtraOptions> = {
   extra?: ExtraOptions
 }
 
-export type BuildAndWatchTasks = [
-  buildTask: gulp.TaskFunction,
-  watchTask: gulp.TaskFunction,
-]
+export type BuildAndWatchTasks = [buildTask: gulp.TaskFunction, watchTask: gulp.TaskFunction]
 
 export const glob = promisify(glob_)
 export function execFile(bin: string, args: string[]): Promise<void> {
@@ -27,10 +24,8 @@ export function execFile(bin: string, args: string[]): Promise<void> {
 const ROOT_DIR = p.resolve(__dirname, "..")
 export const BYAK_DIR = ROOT_DIR
 export const BYAK_DEV_DIR = p.resolve(ROOT_DIR, "..", "_byak-dev")
-export const dist = (...parts: string[]) =>
-  p.resolve(ROOT_DIR, "source", "dist", ...parts)
-export const src = (...parts: string[]) =>
-  p.resolve(ROOT_DIR, "source", ...parts)
+export const dist = (...parts: string[]) => p.resolve(ROOT_DIR, "source", "dist", ...parts)
+export const src = (...parts: string[]) => p.resolve(ROOT_DIR, "source", ...parts)
 
 export function resolve(path: string): string {
   if (p.isAbsolute(path)) return path

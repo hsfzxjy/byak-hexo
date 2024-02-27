@@ -5,9 +5,7 @@ util.docReady(() => {
   const $html = document.querySelector("html")!
 
   window.addEventListener("scroll", function () {
-    $html.scrollTop > 100
-      ? $rocket.classList.add("show")
-      : $rocket.classList.remove("show")
+    $html.scrollTop > 100 ? $rocket.classList.add("show") : $rocket.classList.remove("show")
   })
 
   $rocket.addEventListener("click", function () {

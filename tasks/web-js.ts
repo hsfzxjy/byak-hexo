@@ -5,10 +5,7 @@ import { BuildAndWatchTasks, namedTask, Options, resolveOptions } from "./util"
 
 type WebJSOptions = Options<GulpEsbuildOptions>
 
-function esbuildTask(
-  options: WebJSOptions,
-  watchMode: boolean,
-): gulp.TaskFunction {
+function esbuildTask(options: WebJSOptions, watchMode: boolean): gulp.TaskFunction {
   return () =>
     gulp
       .src(options.entryPoints)

@@ -6,9 +6,7 @@ import { BuildAndWatchTasks, namedTask, Options, resolveOptions } from "./util"
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const sass = gulpSass(require("sass"))
 
-type WebCssOptions = Options<
-  typeof sass extends (opts: infer O) => any ? O : never
->
+type WebCssOptions = Options<typeof sass extends (opts: infer O) => any ? O : never>
 
 function sassTask(options: WebCssOptions): gulp.TaskFunction {
   return () =>
