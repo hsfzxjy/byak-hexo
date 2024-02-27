@@ -47,9 +47,8 @@ $LXGW: "LXGW Wenkai Screen R";
 /* Generate Sans-Serif Fonts */
 
 :root {
-  --ui-text-font-fallback: Roboto, Helvetica, Tahoma, Arial, "PingFang SC",
-    "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei",
-    "Noto Sans CJK", sans-serif;
+  --ui-text-font-fallback: Roboto, Helvetica, Tahoma, Arial, "PingFang SC", "Hiragino Sans GB",
+    "Microsoft YaHei", "WenQuanYi Micro Hei", "Noto Sans CJK", sans-serif;
 }
 
 @font-face {
@@ -72,15 +71,13 @@ $LXGW: "LXGW Wenkai Screen R";
 /* Generate Serif Fonts */
 
 :root {
-  --body-text-font-fallback: Roboto, Helvetica, Tahoma, Arial, "PingFang SC",
-    "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei",
-    "Noto Sans CJK", sans-serif;
+  --body-text-font-fallback: Roboto, Helvetica, Tahoma, Arial, "PingFang SC", "Hiragino Sans GB",
+    "Microsoft YaHei", "WenQuanYi Micro Hei", "Noto Sans CJK", sans-serif;
 }
 
 @font-face {
   font-family: "ByakSerif";
-  src: url("../fonts/Eczar/slim.Eczar-VariableFont_wght.ttf")
-    format("opentype-variations");
+  src: url("../fonts/Eczar/slim.Eczar-VariableFont_wght.ttf") format("opentype-variations");
   font-display: swap;
   font-weight: 100 1000;
   font-synthesis: none;

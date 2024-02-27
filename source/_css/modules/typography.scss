@@ -35,6 +35,10 @@
   }
 }
 
+@mixin lang-zh() {
+  letter-spacing: 0.3px;
+}
+
 /* Styling the post title */
 
 .post {
@@ -51,6 +55,7 @@
 
     &.lang-zh {
       @include fonts.set-font-ui-text-lang-zh;
+      @include lang-zh();
     }
 
     a {
@@ -106,6 +111,8 @@
     code {
       display: inline;
       font-size: 0.9em;
+      background-color: rgb(248, 245, 236);
+      padding: 3px 5px;
     }
 
     .caption {
@@ -120,6 +127,7 @@
   @include fonts.set-font-body-text;
   &.lang-zh {
     @include fonts.set-font-body-text-lang-zh;
+    @include lang-zh();
   }
 
   h1,
