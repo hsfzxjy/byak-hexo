@@ -1,8 +1,8 @@
 each post, index in page.posts.toArray()
-  .post
+  article.post
     if index !== 0
       hr
-    h1.post-title
+    .post-title
       include ./helpers
       a(href=url_for(post.path))
         +title(post)

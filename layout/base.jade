@@ -45,7 +45,7 @@ html(lang="en")
 
     nav#header.hide-wx
       .site-name
-        a#logo(href="/")= config.title
+        a#logo(href="/")= config.header
       span.github-btn
         a.gh-btn(href="#", rel="noopener noreferrer", target="_blank")
           span.gh-ico
@@ -61,92 +61,87 @@ html(lang="en")
               +a_with_current(item.directory, __(item.page), item.icon, page)
         span.after
 
-    #layout.pure-g
-      main#left-panel.pure-u-1: .content_container
-        block content
+    main#left-panel.pure-u-1: .content_container
+      block content
 
-      nav#right-panel.pure-u-1-4
-        #sidebar
-          - var serach_text = __("Search")
-          if theme.google_search
-            .widget
-              #search
-                != search_form()
-          if theme.baidu_search
-            .widget
-              form.search-form(
-                action="https://www.baidu.com/baidu",
-                method="get",
-                accept-charset="utf-8"
+    aside#right-panel.pure-u-1-4
+      #sidebar
+        - var serach_text = __("Search")
+        if theme.google_search
+          .widget
+            #search
+              != search_form()
+        if theme.baidu_search
+          .widget
+            form.search-form(
+              action="https://www.baidu.com/baidu",
+              method="get",
+              accept-charset="utf-8"
+            )
+              input.search-form-input(
+                type="search",
+                name="std",
+                maxlength="20",
+                placeholder="#{serach_text}"
               )
-                input.search-form-input(
-                  type="search",
-                  name="std",
-                  maxlength="20",
-                  placeholder="#{serach_text}"
-                )
-                input(type="hidden", name="si", value="#{config.url.replace(/^https?:\/\//, '')}")
-                input(name="tn", type="hidden", value="bds")
-                input(name="cl", type="hidden", value="3")
-                input(name="ct", type="hidden", value="2097152")
-                input(name="s", type="hidden", value="on")
-          if theme.swiftype
-            .widget
-              input.st-default-search-input(placeholder="#{serach_text}", type="text")
-          if theme.tinysou
-            .widget
-              form
-                input#ts-search-input.ts-search-input(placeholder="#{serach_text}", type="text")
+              input(type="hidden", name="si", value="#{config.url.replace(/^https?:\/\//, '')}")
+              input(name="tn", type="hidden", value="bds")
+              input(name="cl", type="hidden", value="3")
+              input(name="ct", type="hidden", value="2097152")
+              input(name="s", type="hidden", value="on")
+        if theme.swiftype
+          .widget
+            input.st-default-search-input(placeholder="#{serach_text}", type="text")
+        if theme.tinysou
+          .widget
+            form
+              input#ts-search-input.ts-search-input(placeholder="#{serach_text}", type="text")
 
+        .widget
+          .widget-title= __("nav")
+          ul
+            each item in theme.menu
+              if item.position === 'optional'
+                li
+                  a.widget-item(href="#{item.directory}")
+                    i(class=item.icon)
+                    span= __(item.page)
+        .widget
+          .widget-title= __("categories")
+          != list_categories({ show_count: true, order: -1 })
+        .widget
+          .widget-title= __("recent_tags")
+          .tagcloud
+            != tagcloud_ex({ min_font: 0.9, max_font: 0.9, amount: 40, orderby: "recent", order: -1, unit: "rem" })
+        .widget
+          .widget-title= __("recent")
+          != list_posts({ amount: 10 })
+        if theme.disqus
           .widget
-            .widget-title= __("nav")
-            ul
-              each item in theme.menu
-                if item.position === 'optional'
-                  li
-                    a.widget-item(href="#{item.directory}")
-                      i(class=item.icon)
-                      span= __(item.page)
+            .widget-title= __("recent_comments")
+            #recent-comments
+              script.
+                document.write = function (code) {
+                  document.getElementById("recent-comments").innerHTML = code
+                }
+              script(
+                type="text/javascript",
+                src="//#{theme.disqus}.disqus.com/recent_comments_widget.js?num_items=5&hide_avatars=1&avatar_size=32&excerpt_length=20&hide_mods=1",
+                async,
+                defer
+              )
+        if theme.links && theme.links.length
           .widget
-            .widget-title= __("categories")
-            != list_categories({ show_count: true, order: -1 })
-          .widget
-            .widget-title= __("recent_tags")
-            .tagcloud
-              != tagcloud_ex({ min_font: 0.9, max_font: 0.9, amount: 40, orderby: "recent", order: -1, unit: "rem" })
-          .widget
-            .widget-title= __("recent")
-            != list_posts({ amount: 10 })
-          if theme.disqus
-            .widget
-              .widget-title= __("recent_comments")
-              #recent-comments
-                script.
-                  document.write = function (code) {
-                    document.getElementById("recent-comments").innerHTML = code
-                  }
-                script(
-                  type="text/javascript",
-                  src="//#{theme.disqus}.disqus.com/recent_comments_widget.js?num_items=5&hide_avatars=1&avatar_size=32&excerpt_length=20&hide_mods=1",
-                  async,
-                  defer
-                )
-          if theme.links && theme.links.length
-            .widget
-              .widget-title= __("blogroll")
-              each item in theme.links
-                ul
-                  li
-                    a(
-                      href="#{theme.links[i].url}",
-                      title="#{theme.links[i].title}",
-                      target="_blank"
-                    ) #{ item.title }
-      span.toggle-menu
-        svg(viewBox="0 0 12 12", version="1.1", xmlns="http://www.w3.org/2000/svg")
-          line(x1="1", y1="11", x2="11", y2="1", stroke="#69737d", stroke-width="1")
-          line(x1="1", y1="1", x2="11", y2="11", stroke="#69737d", stroke-width="1")
-        span
+            .widget-title= __("blogroll")
+            each item in theme.links
+              ul
+                li
+                  a(href="#{theme.links[i].url}", title="#{theme.links[i].title}", target="_blank") #{ item.title }
+    span.toggle-menu
+      svg(viewBox="0 0 12 12", version="1.1", xmlns="http://www.w3.org/2000/svg")
+        line(x1="1", y1="11", x2="11", y2="1", stroke="#69737d", stroke-width="1")
+        line(x1="1", y1="1", x2="11", y2="11", stroke="#69737d", stroke-width="1")
+      span
 
     #footer(style="text-align: center")= "© "
       a(href="/", rel="nofollow")= config.title + "."
