@@ -1,7 +1,8 @@
 {
   "name": "byak-hexo",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Byak theme for Hexo.",
+  "repository": "https://github.com/hsfzxjy/byak-hexo",
   "dependencies": {
     "genko-markdown": "file:../../../genko-markdown",
     "highlight.js": "^11.9.0",
