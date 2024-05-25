@@ -1,11 +1,63 @@
 const DIGEST_SEP = "\uFFFF\uFFFE"
+const { spawn } = require("child_process")
+
+function waitEnd(child) {
+  return new Promise((resolve) => {
+    child.on("exit", resolve)
+  })
+}
+
+async function collectOutput(stream) {
+  const output = []
+  for await (const chunk of stream) {
+    output.push(chunk)
+  }
+  return Buffer.concat(output).toString()
+}
+
+async function runDot(text) {
+  const pdot = spawn("dot", ["-Tsvg"], {
+    stdio: ["pipe", "pipe", "pipe"],
+    shell: true,
+  })
+
+  const psvgo = spawn("svgo", ["-i", "-", "-o", "-"], {
+    stdio: [pdot.stdout, "pipe", "pipe"],
+    shell: true,
+  })
+
+  pdot.stdin.write(text)
+  pdot.stdin.end()
+
+  const svgOutput = await collectOutput(psvgo.stdout)
+  const dotError = await collectOutput(pdot.stderr)
+  const svgoError = await collectOutput(psvgo.stderr)
+
+  await Promise.allSettled([waitEnd(psvgo)])
+
+  if (pdot.exitCode === 0 && psvgo.exitCode === 0) {
+    return { success: true, content: svgOutput }
+  }
+
+  const output = []
+  if (pdot.exitCode !== 0) {
+    output.push("===> dot error <===")
+    output.push(dotError)
+  }
+  if (psvgo.exitCode !== 0) {
+    output.push("===> svgo error <===")
+    output.push(svgoError)
+  }
+
+  return { success: false, content: output.join("\n") }
+}
 
 function dotPlugin(genko) {
   const defaultHeading = `
-graph [bgcolor="#ffffff00", minlen=2];
-node [shape="egg", color="#444444", fillcolor="seashell", style="filled", fontcolor="#444444", height=0.1, margin="0.1,0.04"];
-edge [color="#444444", fontcolor="#444444", constraint=false, fontsize=10];
-`
+  graph [bgcolor="#ffffff00", minlen=2];
+  node [shape="egg", color="#444444", fillcolor="seashell", style="filled", fontcolor="#444444", height=0.1, margin="0.1,0.04"];
+  edge [color="#444444", fontcolor="#444444", constraint=false, fontsize=10];
+  `
   genko.codex.Executor.register("graphviz", {
     run: async (text) => {
       text = text
@@ -14,44 +66,17 @@ edge [color="#444444", fontcolor="#444444", constraint=false, fontsize=10];
         .replace(/@i/g, "style=invis")
         .replace(/@t/g, 'fillcolor="#ffffff00"')
         .replace(/@p/g, 'shape="plaintext"')
-      const result = await genko.util.exec(
-        "/bin/bash",
-        ["-c", "dot -Tsvg | svgo - -o -"],
-        { stdin: text }
-      )
-      return result.isSuccess
-        ? `<figure class="graphviz">${result.stdout}</figure>`
-        : genko.util.render.asTextBlock(result.toString())
-    },
-  })
 
-  genko.codex.Executor.register("d2", {
-    run: async (text, options) => {
-      let args = ["--pad", "0"]
-      args.push("--bundle=false")
-      if (options.args.theme) {
-        args.push("--theme", options.args.theme)
-      }
-      if (options.args.sketch) {
-        args.push("--sketch")
-      }
-
-      args = [
-        "-c",
-        `svgo -p 0 <(d2 ${args.join(" ")} {{input}} -) -o {{output}}`,
-      ]
-      const result = await genko.util.exec("/bin/bash", args, { stdin: text })
-
-      return result.isSuccess
-        ? `<figure class="gk-d2">${result.output}</figure>`
-        : genko.util.render.asTextBlock(result.toString())
+      const { success, content } = await runDot(text)
+      return success
+        ? `<figure class="graphviz">${content}</figure>`
+        : genko.util.render.asTextBlock(content)
     },
   })
 }
 
 hexo.extend.renderer.register("md", "html", async (data) => {
   const genko = require("genko-markdown").default
-
   genko.registerPlugin(dotPlugin)
 
   let { html, digest } = await genko.parse(data.text, {

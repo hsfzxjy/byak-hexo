@@ -1,15 +1,7 @@
 const path = require("path")
-const autoReload =
-  require("../node_modules/hexo-script-reload/dist/node/index").default
+const autoReload = require("../node_modules/hexo-script-reload/dist/node/index").default
 
-const GENKO_DIR = path.resolve(
-  __dirname,
-  "..",
-  "node_modules",
-  "genko-markdown",
-  "dist",
-  "node"
-)
+const GENKO_DIR = path.resolve(__dirname, "..", "node_modules", "genko-markdown", "dist", "node")
 
 autoReload(hexo, [
   {

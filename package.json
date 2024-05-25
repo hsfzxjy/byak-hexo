@@ -2,7 +2,10 @@
   "name": "byak-hexo",
   "version": "0.1.1",
   "description": "Byak theme for Hexo.",
-  "repository": "https://github.com/hsfzxjy/byak-hexo",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hsfzxjy/byak-hexo.git"
+  },
   "dependencies": {
     "genko-markdown": "file:../../../genko-markdown",
     "highlight.js": "^11.9.0",
@@ -37,7 +40,7 @@
     "hexo-script-reload": "file:../../../hexo-script-reload",
     "husky": "^8.0.3",
     "node-fetch": "^2.7.0",
-    "prettier": "^3.1.1",
+    "prettier": "^3.2.5",
     "rimraf": "^4.4.1",
     "sass": "^1.69.5",
     "ts-node": "^10.9.2",
@@ -50,7 +53,7 @@
     "clean": "gulp clean",
     "lint": "eslint . --ext ts",
     "fix": "eslint . --ext ts --fix",
-    "format": "prettier --config .prettierrc '**/*.ts' '**/*.scss' '**/*.jade' --write --plugin='@prettier/plugin-pug'"
+    "format": "prettier --config .prettierrc **/*.ts **/*.scss **/*.jade --write --plugin=@prettier/plugin-pug"
   },
   "typesync": {
     "ignorePackages": [
@@ -58,10 +61,6 @@
       "eslint",
       "eslint-plugin-prettier"
     ]
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/hsfzxjy/byak-hexo.git"
   },
   "author": "hsfzxjy <hsfzxjy@gmail.com>",
   "license": "SEE LICENSE IN LICENSE & LICENSE.ORIGINAL",
