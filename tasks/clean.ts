@@ -1,14 +1,14 @@
 import fancy_log from "fancy-log"
 import rimraf from "rimraf"
 
-import { dist, glob, namedTask, src } from "./util"
+import { glob, namedTask } from "./util"
 
 export const clean = namedTask("clean", async () => {
-  for (const path of await glob(dist())) {
+  for (const path of await glob("source/dist")) {
     fancy_log.warn("Removing", path)
     await rimraf(path)
   }
-  for (const path of await glob(src("_fonts", "**", "slim.*"))) {
+  for (const path of await glob("source/_fonts/**/slim.*")) {
     fancy_log.warn("Removing", path)
     await rimraf(path)
   }

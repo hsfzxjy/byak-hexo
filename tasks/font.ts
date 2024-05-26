@@ -70,7 +70,7 @@ async function subsetSingleFont(
   }
 }
 
-const subsetFontGlob = src("_fonts/**/*.ttf")
+const subsetFontGlob = "source/_fonts/**/*.ttf"
 const subsetFontGlobIgnored = ["**/icomoon*", "**/*slim.*"]
 
 async function runSubsetFonts(force = true) {
@@ -105,7 +105,7 @@ function watchSubsetFonts() {
   )
 }
 
-const copyFontGlob = [src("_fonts/**/icomoon*"), src("_fonts/**/slim.*")]
+const copyFontGlob = ["source/_fonts/**/icomoon*", "source/_fonts/**/slim.*"]
 
 const copyFonts = namedTask("build:font:copy", () =>
   gulp.src(copyFontGlob).pipe(gulp.dest(dist("fonts"))),

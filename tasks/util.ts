@@ -4,6 +4,7 @@ import { promisify } from "node:util"
 import { glob as glob_ } from "glob"
 import gulp from "gulp"
 import * as p from "path"
+import Undertaker from "undertaker"
 
 export type Options<ExtraOptions> = {
   entryPoints: string[]
@@ -12,7 +13,7 @@ export type Options<ExtraOptions> = {
   extra?: ExtraOptions
 }
 
-export type BuildAndWatchTasks = [buildTask: gulp.TaskFunction, watchTask: gulp.TaskFunction]
+export type BuildAndWatchTasks = [buildTask: Undertaker.Task, watchTask: Undertaker.Task]
 
 export const glob = promisify(glob_)
 export function execFile(bin: string, args: string[]): Promise<void> {
@@ -36,10 +37,7 @@ export function resolveOptions<T>(options: Options<T>): Options<T> {
   return {
     entryPoints: options.entryPoints.map(resolve),
     outDir: resolve(options.outDir),
-    watchGlob:
-      typeof options.watchGlob === "string"
-        ? resolve(options.watchGlob)
-        : options.watchGlob.map(resolve),
+    watchGlob: options.watchGlob,
     extra: options.extra,
   }
 }
