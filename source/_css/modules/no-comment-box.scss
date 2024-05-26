@@ -8,7 +8,6 @@
   padding: 20px 30px;
   color: #555;
   border: dashed darken(colors.$bk-color, 30%) 1px;
-  @include fonts.set-font-ui-text;
   display: block;
 
   h2 {
@@ -18,7 +17,6 @@
   span {
     display: block;
     line-height: 1.5;
-    // text-align: center;
   }
 
   display: none;

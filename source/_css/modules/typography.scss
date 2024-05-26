@@ -1,17 +1,17 @@
 @use "fonts";
 @use "colors";
 
-/* Styling the ruler to separate posts in list view */
-.post > hr {
+.post-list__delimiter {
   line-height: 1em;
   position: relative;
   outline: 0;
   border: 0;
   color: black;
   text-align: center;
-  height: 1.5em;
+  height: 6.5em;
   opacity: 0.5;
-  box-sizing: content-box;
+  box-sizing: border-box;
+  margin: 0;
 
   &:before {
     content: "";
@@ -29,379 +29,80 @@
     display: inline-block;
     color: black;
     padding: 0 0.5em;
-    line-height: 1.5em;
+    line-height: 6.5em;
     color: #818078;
     background-color: colors.$bk-color;
   }
 }
 
-@mixin lang-zh() {
-  letter-spacing: 0.3px;
-}
+.post__title {
+  text-align: center;
+  font-size: 2.5em;
+  font-weight: 500;
 
-/* Styling the post title */
-
-.post {
-  .post-title {
-    margin: 0;
-    color: colors.$text-color;
-    text-align: center;
-    padding: 0;
-    padding-top: 2em;
-    font-weight: 500;
-    font-size: 2.5em;
-
-    @include fonts.set-font-ui-text;
-
-    &.lang-zh {
-      @include fonts.set-font-ui-text-lang-zh;
-      @include lang-zh();
-    }
-
-    a {
-      color: colors.$text-color;
-      position: relative;
-
-      @include fonts.set-font-ui-text;
-
-      &:hover {
-        text-decoration: underline;
-      }
-    }
-  }
-
-  // Reduce padding-top for the first post
-  &:first-child .post-title {
-    border: none;
-    padding: 0;
+  a {
+    --color-a-hover: colors.$text-color;
+    --textdec-a-hover: underline;
   }
 }
 
-/* Post Meta. Creation time, Category, ... */
-
-.post .post-meta {
-  padding: 0;
-  margin: 12px 0 0;
+.post__meta {
   color: #999;
   text-align: center;
-  text-indent: 0.15em;
-  @include fonts.set-font-ui-text;
+  margin: 2em 0;
+}
 
-  a {
-    @include fonts.set-font-ui-text;
+.post__content {
+  line-height: 1.5;
+}
+
+.post__content a.perma-link {
+  $sharp-color: #e45649;
+  color: $sharp-color !important;
+  opacity: 0.5;
+  padding-right: 0.3em;
+  text-decoration: none;
+
+  &:hover,
+  &:active,
+  &:focus {
+    color: $sharp-color !important;
+    border-bottom: none;
+    opacity: 1;
   }
 }
 
-/* Basic styles for post-content */
-
-.post {
-  padding: 25px 0 15px;
-
-  .post-content,
-  .post-archive {
-    clear: left;
-    line-height: 1.6;
-    color: colors.$text-color;
-
-    -moz-hyphens: auto;
-    -ms-hyphens: auto;
-    -webkit-hyphens: auto;
-    hyphens: auto;
-
-    code {
-      display: inline;
-      font-size: 0.9em;
-      background-color: rgb(248, 245, 236);
-      padding: 3px 5px;
-    }
-
-    .caption {
-      display: none;
-    }
-  }
+.post__content blockquote :first-child {
+  margin-top: 0;
 }
 
-/* Styling font style/size/weight */
-
-.post .post-content {
-  @include fonts.set-font-body-text;
-  &.lang-zh {
-    @include fonts.set-font-body-text-lang-zh;
-    @include lang-zh();
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    @include fonts.set-font-ui-text;
-  }
-
-  h1 {
-    font-size: 1.8em;
-    margin: 0.4em 0;
-  }
-
-  h2 {
-    font-size: 1.35em;
-    margin: 0.3em 0;
-  }
-
-  h3 {
-    font-size: 1.25em;
-    margin: 0.2em 0;
-    // font-weight: normal;
-  }
-
-  h4 {
-    font-size: 1.15em;
-    margin: 0.15em 0;
-    // font-weight: normal;
-  }
-
-  h5 {
-    font-size: 1.1em;
-    margin: 0.12em 0;
-    // font-weight: normal;
-  }
-
-  h6 {
-    font-size: 1.05em;
-    margin: 0.1em 0;
-    // font-weight: normal;
-  }
+.post__content a {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
 }
 
-/* Styling <h*> ::bofore */
-
-.post {
-  .post-content,
-  .post-archive {
-    $sharp-color: #e45649;
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      .perma-link {
-        color: $sharp-color !important;
-        opacity: 0.5;
-
-        &:hover,
-        &:active,
-        &:focus {
-          color: $sharp-color !important;
-          border-bottom: none;
-          opacity: 1;
-        }
-      }
-    }
-
-    h1 .perma-link {
-      opacity: 0.9;
-    }
-  }
-}
-
-/* Adjust margins */
-
-.post .post-content {
-  margin-top: 1.5em;
-  &:first-child {
-    margin-top: 0;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    &:first-child {
-      margin-top: 0;
-    }
-
-    + p {
-      margin-top: 0;
-    }
-  }
-
-  ul,
-  ol,
-  blockquote {
-    margin: 0.5em 0;
-  }
-
-  p {
-    margin: 1.5em 0 0 0;
-  }
-
-  .littlefoot-footnote__content > p:first-child {
-    margin-top: 0;
-  }
-}
-
-/* Styling <a> */
-
-.post {
-  .post-content,
-  .post-archive {
-    a {
-      color: darken(colors.$green, 7%) !important;
-      word-break: break-all;
-
-      &:hover,
-      &:active {
-        color: lighten(colors.$green, 3%) !important;
-        text-decoration: underline;
-      }
-    }
-  }
-}
-
-/* Styling <hr> */
-.post .post-content hr {
-  margin: 1.5em auto;
-  border: none;
-  border-top: 1px solid darken(#eee, 4%);
-  position: relative;
-}
-
-/* Styling <img> */
-
-.post .post-content img {
-  max-width: 100%;
-  padding: 0.5em 0;
-  margin: auto;
+.post__content img {
   display: block;
+  margin: 0 auto;
+  max-width: 100%;
 }
 
-/* Styling <ul>, <ol> */
-
-.post .post-content {
-  ul,
-  ol {
-    // padding: 0em 0 0 1em;
-    margin: 0;
-    overflow-y: hidden;
-    overflow-x: auto;
-
-    li p {
-      text-indent: 0;
-    }
-
-    ul {
-      margin: 0;
-    }
-
-    &:last-child {
-      margin: 0;
-    }
-  }
-
-  ul {
-    list-style: none;
-    padding-left: 1.5em;
-    padding-right: 0;
-    margin-left: 0;
-    position: relative;
-
-    li::before {
-      content: "+";
-      font-weight: 500;
-      padding-left: 5px;
-      position: absolute;
-      left: 0;
-    }
-  }
+.post__content[lang="zh"] {
+  letter-spacing: 0.3px;
+  word-break: break-all;
 }
 
-/* Styling tables */
-
-.post .post-content {
-  // not the table in code highlight!
-  > table {
-    border-spacing: 0;
-    border-collapse: collapse;
-
-    margin-top: 0;
-    max-width: 100%;
-    margin: 0 auto;
-    overflow: auto;
-
-    th {
-      font-weight: 600;
-      background-color: darken(colors.$bk-color, 1%) !important;
-    }
-    td,
-    th {
-      padding: 6px 13px;
-      border: 1px solid #dfe2e5;
-    }
-    tr {
-      background-color: lighten(colors.$bk-color, 1%);
-      border-top: 1px solid #c6cbd1;
-      &:nth-child(2n) {
-        background-color: #f6f8fa;
-      }
-    }
-  }
-}
-
-/* Styling graphviz rendered diagrams */
-
-.post .post-content {
-  figure.graphviz {
-    overflow-x: auto;
-    text-align: center;
-    padding-left: 0;
-    padding-right: 0;
-    margin: 0;
-    margin-top: 0.5em;
-
-    svg {
-      display: block;
-      * {
-        font-weight: 700;
-        font-family: "LifeSaver";
-      }
-
-      .bold {
-        font-weight: 800;
-        font-family: "LifeSaver";
-      }
-    }
-  }
-}
-
-/* Styling the tags at the end of a post */
-
-.post .tags {
+.post__tags {
   margin: 1em 0;
-
-  @include fonts.set-font-ui-text();
-  font-size: 0.9em;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 
   a {
-    margin-right: 0.5em;
-
-    &:before {
+    &::before {
       content: "#";
-      display: inline-block;
     }
-  }
-}
 
-/* Styling CC section */
-
-.post-content {
-  .cc {
-    b {
-      font-weight: 600;
-    }
-    @include fonts.set-font-body-text;
+    padding-right: 1em;
   }
 }

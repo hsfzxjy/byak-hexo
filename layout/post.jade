@@ -17,14 +17,14 @@ block title
     meta(itemprop="og:type", content=meta.type) 
 
 block content
-  .post.post-page
-    h1(class=["post-title", "lang-#{page.lang}"])= page.title
-    .post-meta= page.date.format(config.date_format) + " | "
+  .post.post-page(lang=page.lang)
+    h1.post__title(lang=page.lang)= page.title
+    .post__meta= page.date.format(config.date_format) + " | "
       if page.categories.length > 0
-        span.categories
+        span.post__meta-categories
           each category in page.categories.toArray()
             a(href=url_for(category.path))= " " + __(category.name)
-    div(class=["post-content", "lang-#{page.lang}", ...page.extra_classes].join(" "), lang="en")
+    div(class=["post__content", "font__body", ...page.extra_classes].join(" "))
       if page.discussion
         blockquote !{ discussion_text(page.discussion, page.lang) }
       != page.encrypted ? page.encrypted.composedContent : page.content
@@ -60,7 +60,7 @@ block content
           cclink.innerHTML = '<a href="' + location.href + '">' + location.href + "</a>"
         })()
     if page.tags
-      .tags
+      .post__tags
         each tag in page.tags.toArray()
           a(href=url_for(tag.path))= tag.name
     if page.labeleq

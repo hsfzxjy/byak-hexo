@@ -4,8 +4,8 @@ block title
 block content
   .post
     if !page.no_title
-      h1.post-title= page.title
-    .post-content
+      h1.post__title= page.title
+    .post__content.font__body
       != page.content
   if page.comments
     include _partial/comments

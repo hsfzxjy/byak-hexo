@@ -1,15 +1,10 @@
 @use "./colors.scss";
 @use "./fonts";
 
-#right-panel span.toggle-menu {
-  display: none;
-}
-
 #right-panel {
   position: fixed;
   top: 0;
   bottom: 0;
-  // background-color: #eee;
   background-color: #fff;
   width: 100%;
   max-width: 600px;
@@ -103,7 +98,6 @@ span.toggle-menu {
       border-bottom: 1px solid #ddd;
       display: block;
       font-weight: 600;
-      @include fonts.set-font-ui-text;
     }
 
     .comments-title {
@@ -118,7 +112,6 @@ span.toggle-menu {
 
     .tagcloud {
       margin-top: 10px;
-      @include fonts.set-font-ui-text();
 
       a {
         line-height: 1.8;
@@ -136,38 +129,9 @@ span.toggle-menu {
       }
     }
   }
-
-  .search-form {
-    position: relative;
-    overflow: hidden;
-
-    input {
-      background-color: colors.$bk-color;
-      display: inline-block;
-      height: 16px;
-      padding: 7px 11px;
-      border: 1px solid #bbb;
-      border: 1px solid rgba(0, 0, 0, 0.25);
-      font-weight: 400;
-      color: colors.$text-color;
-      font-size: 14px;
-      line-height: 16px;
-      box-sizing: content-box;
-      background-clip: padding-box;
-      -webkit-border-radius: 5px;
-      -moz-border-radius: 5px;
-      -ms-border-radius: 5px;
-      -o-border-radius: 5px;
-      border-radius: 5px;
-      -webkit-box-shadow: none;
-      -moz-box-shadow: none;
-      box-shadow: none;
-    }
-  }
 }
 
 .category-list-count {
-  @include fonts.set-font-ui-text;
   &:before {
     content: "(";
   }
@@ -180,16 +144,10 @@ span.toggle-menu {
 .category-list-link {
   color: #222;
   margin-right: 0.25em;
-  @include fonts.set-font-ui-text();
 }
 
 .widget-item {
   span {
     margin-left: 0.5em;
-    @include fonts.set-font-ui-text;
   }
-}
-
-.post-list-link {
-  @include fonts.set-font-ui-text;
 }

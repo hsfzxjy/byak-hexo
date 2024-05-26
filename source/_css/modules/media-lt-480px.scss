@@ -13,7 +13,7 @@
   }
 
   .post {
-    .post-title {
+    .post__title {
       padding-top: 2em;
       text-align: center;
     }
@@ -27,12 +27,6 @@
   .gk-code {
     margin-left: -12px;
     margin-right: -12px;
-
-    // .gk-code-display {
-    //   &::-webkit-scrollbar {
-    //     display: none;
-    //   }
-    // }
   }
 
   .gk-unified-code {

@@ -50,7 +50,7 @@ window.ENDEC.onCleartext(($el) => {
     const $link = document.createElement("a")
     $link.classList.add("perma-link")
     $link.href = `#${$h.id}`
-    $link.textContent = "# "
+    $link.textContent = "#"
     $h.prepend($link)
   })
 })

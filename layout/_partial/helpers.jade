@@ -5,11 +5,11 @@ mixin a_with_current(href, content, id, page)
     - var url = url.slice(1)
 
   if (href == '/' && is_home()) || is_current(url) || (is_post() && (page.categories.toArray()[0] || {}).name == content)
-    a.current(href=href)
+    a.nav-menu__item.current(href=href)
       i(class=id)
       span= content
   else
-    a(href=href)
+    a.nav-menu__item(href=href)
       i(class=id)
       span= content
 

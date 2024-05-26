@@ -2,34 +2,21 @@
 @use "fonts";
 
 #header {
-  padding: 58px 0 0;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
+  padding-top: 4em;
   position: relative;
 
   .site-name {
     text-align: center;
 
-    h1 {
-      padding: 0;
-      margin: 0;
-      height: 0;
-      overflow: hidden;
-    }
-
     #logo {
       font:
-        bold 38px/1.12 "LifeSaver",
-        "Times New Roman",
-        Georgia,
-        Times,
+        bold 2.5em/1.12 "LifeSaver",
         sans-serif !important;
       color: colors.$text-color;
 
       display: inline-block;
       margin-bottom: 10px;
 
-      span,
       &:hover {
         color: darken(colors.$text-color, 20%);
       }
@@ -39,62 +26,57 @@
       margin: 20px 0;
     }
   }
+}
 
-  #nav-menu {
-    margin: 10px 0 -1px;
-    padding: 0;
-    position: relative;
-    font-size: 0.8rem;
+.nav-menu {
+  margin: 10px 0;
+  padding: 0;
+  position: relative;
+  max-width: 100%;
+  &:before {
+    content: "";
+    position: absolute;
+    height: 1px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border: 0 solid #ddd;
+    border-bottom-width: 1px;
+    z-index: -1;
+  }
+}
 
-    &.left span.before,
-    &.right span.after {
-      content: "";
-      display: block;
-      width: 3em;
-      position: absolute;
-      top: 0;
-      bottom: 0;
-    }
+.nav-menu__container {
+  max-width: 100%;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  position: relative;
+}
 
-    & span.before {
-      left: -2px;
-      background: linear-gradient(to right, colors.$bk-color, rgba(255, 255, 255, 0));
-    }
+a.nav-menu__item {
+  display: inline-block;
+  padding: 0.8em 1.2em;
+  font-size: 0.8em;
+  color: colors.$text-color;
+  border: 1px solid transparent;
+  position: relative;
 
-    & span.after {
-      right: -2px;
-      background: linear-gradient(to right, rgba(255, 255, 255, 0), colors.$bk-color);
-    }
+  &:hover,
+  &:active,
+  &:focus {
+    border-bottom-color: colors.$text-color;
+    color: colors.$text-color;
+  }
 
-    & > div {
-      white-space: nowrap;
-      overflow-x: auto;
+  &.current {
+    border-color: #ddd;
+    border-bottom-color: colors.$bk-color;
+  }
 
-      &::-webkit-scrollbar {
-        display: none;
-      }
-
-      a {
-        display: inline-block;
-        padding: 3px 20px 3px;
-        line-height: 30px;
-        color: colors.$text-color;
-        height: 27px;
-        border: 1px solid transparent;
-
-        &:hover {
-          border-bottom-color: colors.$text-color;
-        }
-
-        &.current {
-          border: 1px solid #ddd;
-          border-bottom-color: colors.$bk-color;
-        }
-
-        span {
-          margin-left: 0.5em;
-        }
-      }
-    }
+  span {
+    margin-left: 0.5em;
   }
 }

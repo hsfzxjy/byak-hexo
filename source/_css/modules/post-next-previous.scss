@@ -12,7 +12,6 @@
   a {
     display: inline-block;
     line-height: 25px;
-    @include fonts.set-font-ui-text();
     font-size: 0.9em;
     color: #555;
     border-bottom: none;

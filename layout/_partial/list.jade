@@ -1,36 +1,28 @@
-each post, index in page.posts.toArray()
-  article.post
+.post-list
+  each post, index in page.posts.toArray()
     if index !== 0
-      hr
-    .post-title
-      include ./helpers
-      a(href=url_for(post.path))
-        +title(post)
-    .post-meta= post.date.format(config.date_format)
-    if theme.duoshuo
-      span.ds-thread-count(data-thread-key=post.path)
-    if theme.disqus
-      span.disqus-comment-count(data-disqus-identifier=post.path)
-    if post.description
-      .post-content
-        != post.description
-    else if page.excerpt
-      .post-content
-        != post.excerpt
-    else if post.content
-      div(
-        class=["post-content", "lang-#{post.lang}", ...post.extra_classes].join(" "),
-        lang="en",
-        data-post-id=post.uid
-      )
-        != post.encrypted ? post.encrypted.composedDigest : post.digest
-        if post.encrypted
-          include ./decryption
-          script.
-            var current_tag = document.currentScript
-            var kind = "#{post.encrypted.kind}"
-            window.ENDEC.decryptEager(current_tag.parentElement, kind)
+      hr.post-list__delimiter
+    article.post(lang=post.lang)
+      h1.post__title
+        include ./helpers
+        a(href=url_for(post.path))
+          +title(post)
+      .post__meta= post.date.format(config.date_format)
+      div(class=["post__content", "font__body", ...post.extra_classes].join(" "), data-post-id=post.uid)
+        if post.description
+          != post.description
+        else if page.excerpt
+          != post.excerpt
+        else if post.content
+          != post.encrypted ? post.encrypted.composedDigest : post.digest
+          if post.encrypted
+            include ./decryption
+            script.
+              var current_tag = document.currentScript
+              var kind = "#{post.encrypted.kind}"
+              window.ENDEC.decryptEager(current_tag.parentElement, kind)
 
-      if post.readmore
-        p.readmore
-          a(href=url_for(post.path))= __("Readmore")
+    if post.readmore
+      .post__readmore
+        a(href=url_for(post.path))
+          span= __("Readmore")

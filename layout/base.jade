@@ -30,73 +30,71 @@ html(lang="en")
     link(rel="apple-touch-icon-precomposed", href="/apple-touch-icon.png")
     link(rel="alternate", type="application/rss+xml", href="/rss.xml")
 
-  body: .body_container
-    include _partial/totop
+  body
+    main.body_container
+      include _partial/totop
 
-    script.
-      if (/micromessenger/.test(navigator.userAgent.toLowerCase())) {
-        var style = document.createElement("style")
-        style.type = "text/css"
-        var text = "#header.hide-wx { display: none!important; }"
-        style.appendChild(document.createTextNode(text))
-
-        document.head.appendChild(style)
-      }
-
-    nav#header.hide-wx
-      .site-name
-        a#logo(href="/")= config.header
-      span.github-btn
-        a.gh-btn(href="#", rel="noopener noreferrer", target="_blank")
-          span.gh-ico
-          span.gh-text
-        a.gh-count(href="#", rel="noopener noreferrer", target="_blank")
       script.
-        window.GH_BUTTON = { username: "#{theme.gh_button.username}" }
-      #nav-menu
-        span.before
-        div
-          each item in theme.menu
-            if item.position === 'main'
-              +a_with_current(item.directory, __(item.page), item.icon, page)
-        span.after
+        if (/micromessenger/.test(navigator.userAgent.toLowerCase())) {
+          var style = document.createElement("style")
+          style.type = "text/css"
+          var text = "#header.hide-wx { display: none!important; }"
+          style.appendChild(document.createTextNode(text))
 
-    main#left-panel.pure-u-1: .content_container
-      block content
+          document.head.appendChild(style)
+        }
+
+      nav#header.hide-wx
+        .site-name
+          a#logo(href="/")= config.header
+        span.github-btn
+          a.gh-btn(href="#", rel="noopener noreferrer", target="_blank")
+            span.gh-ico
+            span.gh-text
+          a.gh-count(href="#", rel="noopener noreferrer", target="_blank")
+        script.
+          window.GH_BUTTON = { username: "#{theme.gh_button.username}" }
+        .nav-menu
+          .nav-menu__container
+            each item in theme.menu
+              if item.position === 'main'
+                +a_with_current(item.directory, __(item.page), item.icon, page)
+
+      .content_container
+        block content
+
+      #footer(style="text-align: center")= "© "
+        a(href="/", rel="nofollow")= config.title + "."
+        | &nbsp;Powered by&nbsp;
+        a(rel="nofollow", target="_blank", href="https://hexo.io") Hexo.
+        | &nbsp;
+        a(rel="nofollow", target="_blank", href="https://github.com/hsfzxjy/byak-hexo") Theme
+        | &nbsp;by&nbsp;
+        a(rel="nofollow", target="_blank", href="https://github.com/pagecho") Cho
+        | &nbsp;&amp;&nbsp;
+        a(rel="nofollow", target="_blank", href="https://github.com/hsfzxjy") hsfzxjy.
+        if theme.beian.enabled
+          div(stype="width:300px;margin:0 auto; padding:20px 0;")
+            a(
+              target="_blank",
+              href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=#{theme.beian.gongan.code}",
+              style="display: inline-block; text-decoration: none; height: 20px; line-height: 20px"
+            )
+              img(src=root + "/img/beian.png", style="float: left")
+              span(
+                style="float: left; height: 20px; line-height: 20px; margin: 0px 0px 0px 5px; color: #939393"
+              ) #{ theme.beian.gongan.text }
+            a(
+              target="_blank",
+              style="display: inline-block; text-decoration: none; height: 20px; line-height: 20px",
+              href="http://beian.miit.gov.cn/"
+            )
+              span(
+                style="float: left; height: 20px; line-height: 20px; margin: 0px 0px 0px 5px; color: #939393"
+              ) #{ theme.beian.gov.text }
 
     aside#right-panel.pure-u-1-4
       #sidebar
-        - var serach_text = __("Search")
-        if theme.google_search
-          .widget
-            #search
-              != search_form()
-        if theme.baidu_search
-          .widget
-            form.search-form(
-              action="https://www.baidu.com/baidu",
-              method="get",
-              accept-charset="utf-8"
-            )
-              input.search-form-input(
-                type="search",
-                name="std",
-                maxlength="20",
-                placeholder="#{serach_text}"
-              )
-              input(type="hidden", name="si", value="#{config.url.replace(/^https?:\/\//, '')}")
-              input(name="tn", type="hidden", value="bds")
-              input(name="cl", type="hidden", value="3")
-              input(name="ct", type="hidden", value="2097152")
-              input(name="s", type="hidden", value="on")
-        if theme.swiftype
-          .widget
-            input.st-default-search-input(placeholder="#{serach_text}", type="text")
-        if theme.tinysou
-          .widget
-            form
-              input#ts-search-input.ts-search-input(placeholder="#{serach_text}", type="text")
-
         .widget
           .widget-title= __("nav")
           ul
@@ -142,35 +140,5 @@ html(lang="en")
         line(x1="1", y1="11", x2="11", y2="1", stroke="#69737d", stroke-width="1")
         line(x1="1", y1="1", x2="11", y2="11", stroke="#69737d", stroke-width="1")
       span
-
-    #footer(style="text-align: center")= "© "
-      a(href="/", rel="nofollow")= config.title + "."
-      | &nbsp;Powered by&nbsp;
-      a(rel="nofollow", target="_blank", href="https://hexo.io") Hexo.
-      | &nbsp;
-      a(rel="nofollow", target="_blank", href="https://github.com/hsfzxjy/byak-hexo") Theme
-      | &nbsp;by&nbsp;
-      a(rel="nofollow", target="_blank", href="https://github.com/pagecho") Cho
-      | &nbsp;&amp;&nbsp;
-      a(rel="nofollow", target="_blank", href="https://github.com/hsfzxjy") hsfzxjy.
-      if theme.beian.enabled
-        div(stype="width:300px;margin:0 auto; padding:20px 0;")
-          a(
-            target="_blank",
-            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=#{theme.beian.gongan.code}",
-            style="display: inline-block; text-decoration: none; height: 20px; line-height: 20px"
-          )
-            img(src=root + "/img/beian.png", style="float: left")
-            span(
-              style="float: left; height: 20px; line-height: 20px; margin: 0px 0px 0px 5px; color: #939393"
-            ) #{ theme.beian.gongan.text }
-          a(
-            target="_blank",
-            style="display: inline-block; text-decoration: none; height: 20px; line-height: 20px",
-            href="http://beian.miit.gov.cn/"
-          )
-            span(
-              style="float: left; height: 20px; line-height: 20px; margin: 0px 0px 0px 5px; color: #939393"
-            ) #{ theme.beian.gov.text }
 
   != js([root + "/dist/js/main.js"])

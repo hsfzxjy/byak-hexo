@@ -213,7 +213,7 @@ window.ENDEC = {
 
 docReady(() => {
   document
-    .querySelectorAll("div.post-content")
+    .querySelectorAll("div.post__content")
     .forEach(($el) => EncryptedNode.of($el as HTMLElement).initForm())
 })
 

@@ -1,6 +1,7 @@
 /* back-to-top rocket*/
 #rocket {
   position: fixed;
+  z-index: 1000;
   right: 50px;
   bottom: 50px;
   display: block;
