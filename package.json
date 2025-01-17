@@ -33,7 +33,7 @@
     "eslint-plugin-simple-import-sort": "^10.0.0",
     "fancy-log": "^2.0.0",
     "glob": "^8.1.0",
-    "gulp": "^4.0.2",
+    "gulp": "^5.0.0",
     "gulp-esbuild": "^0.11.2",
     "gulp-rename": "^2.0.0",
     "gulp-sass": "^5.1.0",
@@ -53,7 +53,7 @@
     "clean": "gulp clean",
     "lint": "eslint . --ext ts",
     "fix": "eslint . --ext ts --fix",
-    "format": "prettier --config .prettierrc **/*.ts **/*.scss **/*.jade --write --plugin=@prettier/plugin-pug"
+    "format": "prettier --config .prettierrc **/*.ts **/*.scss **/*.jade scripts/**/*.js --write --plugin=@prettier/plugin-pug"
   },
   "typesync": {
     "ignorePackages": [

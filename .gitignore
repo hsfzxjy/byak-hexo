@@ -2,3 +2,6 @@ node_modules/
 source/dist/
 .sass-cache/
 .font-cache*
+
+_cnfonts/
+source/_js/src/cnfonts.js

@@ -1,10 +1,12 @@
 @use "colors";
+@use "sass:color";
 
 code,
 code *,
 pre,
 pre * {
   font-weight: 500;
+  letter-spacing: 0;
   font-family: "ByakMono", "Input Mono", "PT Mono", Consolas, Monaco, Menlo, monospace !important;
 }
 
@@ -29,13 +31,25 @@ pre {
 
 code {
   word-break: break-all;
-  text-shadow: 0 1px colors.$bk-color;
-  padding: 0 2px;
+  // text-shadow: 0 1px colors.$bk;
+  // background-color: rgb(255, 247, 247);
+  // border-radius: 2px;
+  // padding: 0 4px;
+}
+
+.post__content {
+  code {
+    &::before,
+    &::after {
+      // content: "`";
+      color: darkgray;
+    }
+  }
 }
 
 $hl-color: rgba(255, 255, 0, 0.4);
-$hl-text-color: darken($hl-color, 60%);
-$hl-bg-color: darken($hl-color, 20%);
+$hl-text-color: color.adjust($hl-color, $lightness: -60%);
+$hl-bg-color: color.adjust($hl-color, $lightness: -20%);
 
 .post__content {
   --blue-color: rgb(42, 192, 252);

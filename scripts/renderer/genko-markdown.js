@@ -15,8 +15,16 @@ async function collectOutput(stream) {
   return Buffer.concat(output).toString()
 }
 
-async function runDot(text) {
-  const pdot = spawn("dot", ["-Tsvg"], {
+function fixEntities(text) {
+  return text.replace(/&quot;/g, "'")
+  // .replace(/(<style[^>]*>)([^<]*?)(<\/style>)/g, (_, $1, $2, $3) => {
+  //   return $1 + $2.replace(/&quot;/g, '"').replace(/&apos;/g, "'") + $3
+  // })
+  // .replace(/&quot;/g, "'")
+}
+
+async function runSVGRenderer(cmd, args, text) {
+  const pdot = spawn(cmd, args, {
     stdio: ["pipe", "pipe", "pipe"],
     shell: true,
   })
@@ -29,19 +37,25 @@ async function runDot(text) {
   pdot.stdin.write(text)
   pdot.stdin.end()
 
-  const svgOutput = await collectOutput(psvgo.stdout)
-  const dotError = await collectOutput(pdot.stderr)
-  const svgoError = await collectOutput(psvgo.stderr)
+  const [svgOutput, dotError, svgoError] = await Promise.all([
+    collectOutput(psvgo.stdout),
+    collectOutput(pdot.stderr),
+    collectOutput(psvgo.stderr),
+  ])
+
+  // const svgOutput = await collectOutput(psvgo.stdout)
+  // const dotError = await collectOutput(pdot.stderr)
+  // const svgoError = await collectOutput(psvgo.stderr)
 
   await Promise.allSettled([waitEnd(psvgo)])
 
   if (pdot.exitCode === 0 && psvgo.exitCode === 0) {
-    return { success: true, content: svgOutput }
+    return { success: true, content: fixEntities(svgOutput) }
   }
 
   const output = []
   if (pdot.exitCode !== 0) {
-    output.push("===> dot error <===")
+    output.push(`===> ${cmd} error <===`)
     output.push(dotError)
   }
   if (psvgo.exitCode !== 0) {
@@ -67,9 +81,36 @@ function dotPlugin(genko) {
         .replace(/@t/g, 'fillcolor="#ffffff00"')
         .replace(/@p/g, 'shape="plaintext"')
 
-      const { success, content } = await runDot(text)
+      const { success, content } = await runSVGRenderer("dot", ["-Tsvg"], text)
       return success
         ? `<figure class="graphviz">${content}</figure>`
+        : genko.util.render.asTextBlock(content)
+    },
+  })
+}
+
+function d2Plugin(genko) {
+  genko.codex.Executor.register("d2", {
+    run: async (text) => {
+      let theme = "0"
+      const regex = /#\s*theme=(\w+)/gm
+      text = text.replace(regex, (_, $1) => {
+        theme = $1
+        return ""
+      })
+      let engine = "elk"
+      text = text.replace(/#\s*layout=(\w+)/gm, (_, $1) => {
+        engine = $1
+        return ""
+      })
+      console.log(engine)
+      const { success, content } = await runSVGRenderer(
+        "d2",
+        ["--pad", "0", "--scale", "0.7", "--layout", engine, "--theme", theme, "-", "-"],
+        text,
+      )
+      return success
+        ? `<figure class="d2">${content}</figure>`
         : genko.util.render.asTextBlock(content)
     },
   })
@@ -78,6 +119,7 @@ function dotPlugin(genko) {
 hexo.extend.renderer.register("md", "html", async (data) => {
   const genko = require("genko-markdown").default
   genko.registerPlugin(dotPlugin)
+  genko.registerPlugin(d2Plugin)
 
   let { html, digest } = await genko.parse(data.text, {
     digest: true,

@@ -9,7 +9,7 @@ import { BYAK_DEV_DIR, namedTask } from "./util"
 
 export const initBasic = namedTask("init:basic", () =>
   gulp
-    .src("_dev-scaffold/**/*")
+    .src("_dev-scaffold/**/*", { encoding: false })
     .pipe(
       new stream.Transform({
         objectMode: true,

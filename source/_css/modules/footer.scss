@@ -1,12 +1,9 @@
 @use "fonts";
 
 #footer {
-  padding: 0.8em 0 3.6em;
-  margin-top: 1em;
+  z-index: 1;
+  grid-area: footer;
+  margin-bottom: 3em;
   line-height: 1.5;
   color: #999;
-
-  span {
-    font-size: 0.9em;
-  }
 }

@@ -1,10 +1,18 @@
 import * as util from "./util"
 
 util.docReady(() => {
-  const $toggleButton = document.querySelector("span.toggle-menu")!
-  const $rightPanel = document.getElementById("right-panel")!
+  const toggleAside = () => {
+    document.body.classList.toggle("aside-shown")
+  }
 
-  $toggleButton.addEventListener("click", () => {
-    $rightPanel.classList.toggle("show")
+  for (const selector of [".nav__toggler", ".nav__logo", ".nav__togglerClose"]) {
+    document.querySelector(selector)!.addEventListener("click", toggleAside)
+  }
+
+  document.querySelector(".mainContainer")?.addEventListener("click", (e) => {
+    const classList = document.body.classList
+    if (classList.contains("aside-shown")) {
+      classList.remove("aside-shown")
+    }
   })
 })

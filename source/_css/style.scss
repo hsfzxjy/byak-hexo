@@ -1,6 +1,6 @@
 @use "./normalize.css";
-@use "./grids-responsive-min.css";
-@use "./pure-min.css";
+// @use "./grids-responsive-min.css";
+// @use "./pure-min.css";
 
 @use "modules/fonts.scss";
 @use "modules/colors.scss";
@@ -8,6 +8,7 @@
 @use "../../node_modules/littlefoot/dist/littlefoot.css";
 @use "./modules/gh-button.scss";
 
+@use "modules/layout-rules.scss";
 @use "modules/header.scss";
 @use "modules/sidebar.scss";
 
@@ -24,7 +25,7 @@
 
 @use "modules/links.scss";
 
-@use "modules/rocket.scss";
+// @use "modules/rocket.scss";
 @use "modules/readmore.scss";
 @use "modules/code.scss";
 @use "modules/post-next-previous.scss";
@@ -56,49 +57,47 @@ body {
     overflow-x: auto;
     overflow-y: hidden;
     min-width: unset !important;
+    max-width: 100vw;
 
     a {
       color: colors.$text-color !important;
     }
   }
-
-  p:not([class]) #{$mjx} {
-    margin-top: -0.5em;
-  }
 }
 
 body,
 html {
-  overflow-x: hidden;
-  font-size: 17px;
+  overflow-x: clip;
+  font-size: calc(var(--base-font-size) * var(--font-scaling));
 }
-
-.body_container {
-  max-width: 960px;
+.mainContainer {
   margin: 0 auto;
-}
-
-.content_container {
-  padding-right: 0;
-  padding: 0 80px;
-  padding-top: 20px;
+  grid-area: main;
+  width: 100%;
+  padding: 20px;
+  scroll-margin-block-start: 4em;
+  z-index: 1;
 }
 
 :root {
   --color-a-normal: colors.$text-color;
   --color-a-hover: colors.$green;
   --textdec-a-normal: none;
-  --textdec-a-hover: none;
+  --textdec-a-hover: underline;
+  --base-font-size: 16.2px;
+  --font-scaling: 1;
 }
 
 a {
   color: var(--color-a-normal);
   text-decoration: var(--textdec-a-normal);
+  text-decoration-thickness: auto !important;
   transition: all 0.1s ease-in;
 }
 
 a:hover,
-a:active {
+a:active,
+a:focus {
   color: var(--color-a-hover);
   text-decoration: var(--textdec-a-hover);
   text-underline-offset: 0.2em;

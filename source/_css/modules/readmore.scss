@@ -1,31 +1,23 @@
+@use "sass:color";
 @use "fonts";
 @use "colors";
 
 .post__readmore {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  justify-content: end;
   margin-top: 2em;
   margin-bottom: 0;
-  a {
-    color: #fff;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    width: fit-content;
-    padding: 0.5em 0.9em;
-    border: 1px solid colors.$text-color;
-    background: colors.$text-color;
+  cursor: pointer;
 
-    &:hover {
-      color: colors.$text-color;
-      background: #eee;
-    }
+  color: color.invert(colors.$text-color);
+  width: fit-content;
+  font-size: 0.8em;
+  padding: 0.5em 0.9em;
+  border: 2px solid colors.$text-color;
+  background: colors.$text-color;
 
-    span {
-      align-self: flex-start;
-      font-size: 0.8em;
-    }
+  &:hover {
+    color: colors.$text-color;
+    background: color.invert(colors.$text-color);
   }
 }

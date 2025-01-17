@@ -28,7 +28,7 @@ export default function (options: WebCssOptions): BuildAndWatchTasks {
     namedTask("watch:css", () =>
       gulp.watch(
         options.watchGlob,
-        { ignoreInitial: false },
+        { ignoreInitial: false, followSymlinks: true },
         namedTask("watch:css:once", sassTask(options)),
       ),
     ),

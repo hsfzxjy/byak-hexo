@@ -1,13 +1,18 @@
 .post-list
   each post, index in page.posts.toArray()
-    if index !== 0
-      hr.post-list__delimiter
     article.post(lang=post.lang)
-      h1.post__title
-        include ./helpers
-        a(href=url_for(post.path))
-          +title(post)
-      .post__meta= post.date.format(config.date_format)
+      .post__title-block
+        h1.post__title
+          include ./helpers
+          a(href=url_for(post.path))
+            +title(post)
+        span.post__lang-tag.font__ui(lang=en)= post.lang
+
+      .post__meta(lang="zh")= post.date.format(config.date_format) + " | "
+        if post.categories.length > 0
+          span.post__meta-categories
+            each category in post.categories.toArray()
+              a(href=url_for(category.path))= " " + category.name
       div(class=["post__content", "font__body", ...post.extra_classes].join(" "), data-post-id=post.uid)
         if post.description
           != post.description
@@ -22,7 +27,5 @@
               var kind = "#{post.encrypted.kind}"
               window.ENDEC.decryptEager(current_tag.parentElement, kind)
 
-    if post.readmore
-      .post__readmore
-        a(href=url_for(post.path))
-          span= __("Readmore")
+      .post__readmore.font__ui(lang="zh")
+        a(href=url_for(post.path))= __("Readmore")

@@ -1,0 +1,59 @@
+@use "layout";
+
+:root {
+  --aside-width: min(300px, 30vw);
+}
+
+body {
+  display: grid;
+  max-width: 100%;
+  grid-template-areas:
+    "navbar main ."
+    ".  main ."
+    "p main ."
+    "p footer .";
+  grid-template-columns: [left-most] 1fr minmax(
+      0,
+      calc(var(--base-font-size) * var(--font-scaling) * 50)
+    ) 1fr [right-most];
+  grid-template-rows: var(--nav-height) [side-start] auto [side-end] auto min-content;
+  align-items: start;
+}
+
+@include layout.on-middle-device {
+  :root {
+    --aside-width: 300px;
+  }
+  body {
+    grid-template-areas:
+      "navbar main"
+      "side main"
+      "footer footer";
+    grid-template-columns: [left-most] var(--aside-width) [right-most] 1fr;
+    grid-template-rows: var(--nav-height) [side-start] auto [side-end] min-content;
+    transition: grid-template-columns 0.5s;
+
+    &.aside-shown {
+      grid-template-columns: var(--aside-width) 100%;
+    }
+  }
+}
+
+@include layout.on-small-device {
+  :root {
+    --aside-width: 300px;
+  }
+  body {
+    grid-template-areas:
+      "navbar navbar"
+      "side main"
+      "side main"
+      "footer footer";
+    grid-template-columns: [left-most] 0 [right-most] 100%;
+    transition: grid-template-columns 0.5s;
+
+    &.aside-shown {
+      grid-template-columns: var(--aside-width) 100%;
+    }
+  }
+}

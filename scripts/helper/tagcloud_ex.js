@@ -5,10 +5,7 @@ const moment = require("moment")
 // require('hexo')
 
 function tagcloudHelper(tags, options) {
-  if (
-    !options &&
-    (!tags || !Object.prototype.hasOwnProperty.call(tags, "length"))
-  ) {
+  if (!options && (!tags || !Object.prototype.hasOwnProperty.call(tags, "length"))) {
     options = tags
     tags = this.site.tags
   }
@@ -77,9 +74,7 @@ function tagcloudHelper(tags, options) {
     const ratio = length ? sizes.indexOf(tag.length) / length : 0
     const size = min + (max - min) * ratio
     let style = `font-size: ${parseFloat(size.toFixed(2))}${unit};`
-    const attr = className
-      ? ` class="${className}-${Math.round(ratio * level)}"`
-      : ""
+    const attr = className ? ` class="${className}-${Math.round(ratio * level)}"` : ""
 
     if (color) {
       const midColor = startColor.mix(endColor, ratio)
@@ -89,7 +84,7 @@ function tagcloudHelper(tags, options) {
     result.push(
       `<a href="${url_for.call(this, tag.path)}" style="${style}"${attr}>${
         transform ? transform(tag.name) : tag.name
-      }</a>`
+      }</a>`,
     )
   })
 

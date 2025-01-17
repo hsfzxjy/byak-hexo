@@ -1,61 +1,61 @@
 @use "fonts";
 @use "colors";
+@use "layout";
+@use "sass:color";
 
 #toc {
-  position: fixed;
-  top: 14px;
-  left: 12px;
-  font-size: 12px;
-
-  z-index: 100;
+  position: relative;
 
   ol {
     list-style: none;
     padding: 0;
+    padding-left: 1em;
     margin: 0;
+    line-height: 1.5;
   }
-
-  .toc-toggler {
-    &::before {
-      content: "TOC";
-      vertical-align: sub;
-    }
-    padding: 6px 10px;
-    border: solid 1px #000;
-    display: inline-block;
-    cursor: pointer;
-    opacity: 0.15;
-    transition: opacity 0.2s;
-    background-color: rgba(colors.$bk-color, 1);
-
-    &:hover,
-    &:focus {
-      opacity: 1;
-    }
-
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  a {
+    color: color.adjust(#69737d, $lightness: -10%);
+    transition: all 0.5s;
+    display: block;
+    padding: 0.5em 0;
+    position: relative;
+    padding-right: 1em;
+    border-right: 3px solid transparent;
   }
-
-  .toc-content {
-    font-size: 1.3em;
-    transition: transform 0.2s ease-out;
-    position: absolute;
-    width: max-content;
-    max-width: calc(100vw - 96px);
-    transform: scaleY(0);
-    transform-origin: 0 0;
-    background-color: rgba($color: colors.$bk-color, $alpha: 1);
-    border: solid 1px #000;
-    padding: 10px 12px;
+  a.active {
+    color: black;
+    border-right-color: black;
   }
+  .toc-number {
+    font-weight: bold;
+  }
+}
 
-  &.expanded {
-    .toc-content {
-      transform: scaleY(1);
-    }
-    .toc-toggler {
-      opacity: 1;
-      border-bottom-width: 0;
+@include layout.on-middle-device {
+  #toc {
+    margin-bottom: 2em;
+
+    &::after {
+      content: " ";
+      display: block;
+      margin-top: 2em;
+      --a: 90deg; /* control the angle */
+      --s: 10px; /* size of the zig-zag */
+      --b: 3px; /* control the thickness */
+
+      background: #69737d;
+      height: calc(var(--b) + var(--s) / (2 * tan(var(--a) / 2)));
+      width: 100%;
+      --_g: var(--s) repeat-x
+        conic-gradient(
+          from calc(var(--a) / -2) at bottom,
+          #0000,
+          #000 1deg calc(var(--a) - 1deg),
+          #0000 var(--a)
+        );
+      mask:
+        50% calc(-1 * var(--b)) / var(--_g) exclude,
+        50% / var(--_g);
     }
   }
 }

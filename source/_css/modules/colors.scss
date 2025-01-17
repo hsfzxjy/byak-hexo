@@ -1,5 +1,7 @@
+@use "sass:color";
+
 $bk-color: white;
 $text-color: #000;
 $green: #42b983;
-$code: darken(#805a42, 15%);
-$sidenav-color: darken(#6e7173, 15%);
+$code: color.adjust(#805a42, $lightness: -15%);
+$sidenav-color: color.adjust(#6e7173, $lightness: -15%);

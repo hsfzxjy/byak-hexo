@@ -1,3 +1,4 @@
+@use "sass:color";
 @use "fonts";
 @use "colors";
 
@@ -7,7 +8,7 @@
   margin: 2.5em 0;
   padding: 20px 30px;
   color: #555;
-  border: dashed darken(colors.$bk-color, 30%) 1px;
+  border: dashed color.adjust(colors.$bk-color, $lightness: -30%) 1px;
   display: block;
 
   h2 {

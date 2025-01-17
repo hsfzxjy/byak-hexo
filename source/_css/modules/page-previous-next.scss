@@ -1,26 +1,31 @@
+@use "sass:color";
+@use "colors";
+
 .page-navigator {
-  border-top: 1px solid #ddd;
-  list-style: none;
-  margin-top: 25px;
-  padding: 25px 0;
-  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1em;
+  padding-top: 1em;
+  border-top: 1px solid #666;
+}
 
-  a {
-    display: inline-block;
-    line-height: 25px;
-    padding: 5px 20px;
-    border: 1px solid #ddd;
+.page__button {
+  display: flex;
+  cursor: pointer;
+  color: color.invert(colors.$text-color);
+  width: fit-content;
+  font-size: 0.8em;
+  padding: 0.5em 0.9em;
+  border: 2px solid colors.$text-color;
+  background: colors.$text-color;
 
-    &.pre {
-      float: left;
-    }
+  &[disabled] {
+    visibility: hidden;
+  }
 
-    &.next {
-      float: right;
-    }
-
-    &:hover {
-      border-color: #999;
-    }
+  &:hover {
+    color: colors.$text-color;
+    background: color.invert(colors.$text-color);
   }
 }

@@ -1,3 +1,4 @@
+@use "sass:color";
 @use "colors";
 
 $bq-text-color: colors.$text-color;
@@ -15,7 +16,7 @@ blockquote,
   $bq-color: #d4d4d4;
   color: $bq-text-color;
   position: relative;
-  background-color: lighten($bq-color, 10%);
+  background-color: color.adjust($bq-color, $lightness: 12%);
 
   &::before {
     content: "";

@@ -6,6 +6,11 @@ declare global {
       onCleartext: (fn: ($el: HTMLElement) => any) => void
     }
     MathJax: any
+    $fontchan: {
+      decodeCss: () => Promise<DataView>
+      injectCss: () => Promise<void>
+      sha: string
+    }
   }
 
   interface Crypto {
@@ -13,12 +18,20 @@ declare global {
   }
 }
 
-import "./gh-buttons"
+import "./cnfonts"
+window.$fontchan.injectCss()
+
+import "./gh-button"
 import "./mathjax"
 import "./sidebar"
-import "./totop"
 import "./weixin"
 import "./toc"
+
+window.ENDEC = window.ENDEC || {
+  onCleartext(fn: (el: Element) => void) {
+    document.querySelectorAll("div.post__content").forEach((el) => fn(el))
+  },
+}
 
 /* Register listeners on posts being decrypted.
    THE ORDER MUST NOT CHANGE */

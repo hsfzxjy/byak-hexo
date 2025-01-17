@@ -10,9 +10,8 @@ block title
     meta(itemprop="image", content=meta.image)
     meta(itemprop="og:image", content=meta.image)
   if page.digest
-    - var digest = truncate(strip_html(page.digest), { length: 150 })
+    - var digest = truncate(strip_html(page.digest), { length: 60 })
     meta(itemprop="description", content=digest)
-    meta(itemprop="og:description", content=digest)
   if meta.type
     meta(itemprop="og:type", content=meta.type) 
 
@@ -23,7 +22,7 @@ block content
       if page.categories.length > 0
         span.post__meta-categories
           each category in page.categories.toArray()
-            a(href=url_for(category.path))= " " + __(category.name)
+            a(href=url_for(category.path))= " " + category.name
     div(class=["post__content", "font__body", ...page.extra_classes].join(" "))
       if page.discussion
         blockquote !{ discussion_text(page.discussion, page.lang) }
@@ -80,8 +79,9 @@ block content
           .ds-share-icons-more
 
     include _partial/comments
-    if !page.encrypted && page.toc
-      #toc
-        .toc-toggler
-        .toc-content
-          != toc(page.content)
+block right
+  if !page.encrypted
+    #toc.font__body(lang=page.lang)
+      .toc-toggler
+      .toc-content
+        != toc(page.content)

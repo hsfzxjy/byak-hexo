@@ -1,6 +1,8 @@
 if page.next || page.prev
-  .page-navigator
-    if page.prev
-      a.pre(href=url_for(page.prev_link ? page.prev_link : page.prev.path))= __("previous")
-    if page.next
-      a.next(href=url_for(page.next_link ? page.next_link : page.next.path))= __("next")
+  .page-navigator.font__ui(lang="zh")
+    span.page__button(disabled=!page.prev)
+      if page.prev
+        a.pre(href=url_for(page.prev_link ? page.prev_link : page.prev.path))= __("previous")
+    span.page__button(disabled=!page.next)
+      if page.next
+        a.next(href=url_for(page.next_link ? page.next_link : page.next.path))= __("next")

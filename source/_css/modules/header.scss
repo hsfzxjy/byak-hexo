@@ -1,82 +1,304 @@
 @use "./colors.scss";
 @use "fonts";
+@use "./layout";
 
-#header {
-  padding-top: 4em;
+:root {
+  --nav-logo-size-em: 3;
+  --nav-padding-em: 1;
+  --nav-height: calc((var(--nav-logo-size-em) + var(--nav-padding-em) * 2) * 1em);
+}
+
+.nav {
+  grid-area: navbar;
+  width: var(--aside-width);
+  justify-self: end;
+  display: flex;
+  position: sticky;
+  align-self: start;
+  padding: 1em 0 1em 20px;
+  height: var(--nav-height);
+  min-height: var(--nav-height);
+  top: 0;
+
+  transition:
+    font-size 0.5s,
+    box-shadow 0.5s,
+    transform 0.5s,
+    width 0.25s;
+
+  > * {
+    flex-shrink: 0;
+  }
+
+  a {
+    transition: none;
+  }
+}
+
+.nav__brand {
+  font-weight: normal;
+  font-size: 2.5em;
+  font-family: var(--header-font);
+  padding-left: calc(1em / 2.5 * 0.9);
+}
+
+.nav__pathIndicator {
+  flex-basis: 0px;
+  flex-shrink: 1;
+  display: none;
+  font-size: 2.5em;
+  color: #000;
+  font-weight: normal;
+  font-family: var(--header-font);
+
+  a::before {
+    content: ">>=";
+    user-select: none;
+    pointer-events: none;
+    color: #888;
+    margin: 0 calc(1em / 2.5 * 0.9);
+  }
+}
+
+.nav__logo {
+  --size: calc(var(--nav-logo-size-em) * 1em);
+  width: var(--size);
+  height: var(--size);
+  border-radius: 10%;
+  box-shadow: 0 0 5px 0 #69737d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  > img {
+    width: 70%;
+  }
+}
+
+.nav__core {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: calc(1em / 2.5 * 0.9);
+}
+
+.nav__toggler {
+  justify-content: center;
+  cursor: pointer;
+  color: transparent;
+  transition: color 0.5s;
   position: relative;
+  width: calc(var(--nav-logo-size-em) * 1em);
+  height: 100%;
 
-  .site-name {
-    text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 20%;
 
-    #logo {
-      font:
-        bold 2.5em/1.12 "LifeSaver",
-        sans-serif !important;
-      color: colors.$text-color;
+  display: none;
+}
 
-      display: inline-block;
-      margin-bottom: 10px;
+.nav__toggler-bar {
+  height: 3px;
+  width: 70%;
+  background-color: black;
 
-      &:hover {
-        color: darken(colors.$text-color, 20%);
+  &.bar2 {
+    width: 55%;
+  }
+}
+
+.nav__togglerClose {
+  width: 2.5rem;
+  height: 2.5rem;
+  position: absolute;
+  left: calc(var(--aside-width) - 2.5rem);
+  top: -9em;
+  cursor: pointer;
+  display: none;
+  transition: all 0.5s;
+  opacity: 0;
+}
+
+.nav__togglerClose-circle {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  box-shadow: 0px 0px 5px 0px #69737d;
+}
+
+.nav__togglerClose-bar {
+  position: absolute;
+  height: 2px;
+  background: #a7aeb5;
+  left: 20%;
+  width: 60%;
+  top: calc(50% - 1px);
+  transition: all 0.5s;
+}
+
+@include layout.on-small-device {
+  .nav {
+    font-size: 0.7em;
+    justify-self: start;
+    padding: calc(var(--nav-padding-em) * 1em);
+    width: 100%;
+    z-index: 400;
+    background-color: white;
+    box-shadow: -2px 2px 8px 1px #ddd;
+  }
+
+  .nav__toggler {
+    display: flex;
+    transition: width 0.5s 0.1s;
+  }
+
+  .nav__pathIndicator {
+    display: block;
+    transition: opacity 0.5s;
+  }
+
+  .nav__logo {
+    cursor: pointer;
+  }
+
+  .nav__core {
+    transition: transform 0.5s;
+    transform-origin: top left;
+  }
+
+  .nav__togglerClose {
+    display: block;
+  }
+
+  .aside-shown {
+    .nav {
+      // font-size: 1em;
+      width: var(--aside-width);
+      box-shadow: -2px 2px 1px 1px white;
+    }
+
+    .nav__core {
+      transform: translate(calc(20px - 1em), 1em) scale(calc(1 / 0.7));
+    }
+
+    .nav__brand {
+      pointer-events: none;
+    }
+
+    .nav__pathIndicator {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .nav__toggler {
+      width: 0;
+    }
+
+    .nav__togglerClose {
+      top: 2.5em;
+      opacity: 1;
+
+      .bar1 {
+        transform: rotate(45deg);
+      }
+
+      .bar2 {
+        transform: rotate(-45deg);
       }
     }
-
-    .github-btn {
-      margin: 20px 0;
-    }
   }
 }
 
-.nav-menu {
-  margin: 10px 0;
-  padding: 0;
-  position: relative;
-  max-width: 100%;
-  &:before {
-    content: "";
-    position: absolute;
-    height: 1px;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    border: 0 solid #ddd;
-    border-bottom-width: 1px;
-    z-index: -1;
-  }
-}
+// #header {
+//   grid-area: "navbar";
+//   padding-top: 1em;
+//   position: relative;
+//   display: flex;
+//   display: none;
+//   align-items: center;
+//   justify-content: space-around;
+//   flex-wrap: wrap;
+//   .site-name {
+//     // text-align: center;
 
-.nav-menu__container {
-  max-width: 100%;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  display: flex;
-  justify-content: flex-start;
-  flex-direction: row;
-  position: relative;
-}
+//     #logo {
+//       font: bold 2em "LifeSaver" !important;
+//       color: colors.$text-color;
 
-a.nav-menu__item {
-  display: inline-block;
-  padding: 0.8em 1.2em;
-  font-size: 0.8em;
-  color: colors.$text-color;
-  border: 1px solid transparent;
-  position: relative;
+//       display: inline;
+//       margin-bottom: 10px;
 
-  &:hover,
-  &:active,
-  &:focus {
-    border-bottom-color: colors.$text-color;
-    color: colors.$text-color;
-  }
+//       &:hover {
+//         color: darken(colors.$text-color, 20%);
+//       }
+//     }
 
-  &.current {
-    border-color: #ddd;
-    border-bottom-color: colors.$bk-color;
-  }
+//     .github-btn {
+//       margin: 20px 0;
+//     }
+//   }
+// }
 
-  span {
-    margin-left: 0.5em;
-  }
-}
+// .nav-menu {
+//   margin: 10px 0;
+//   padding: 0;
+//   position: relative;
+//   max-width: 100%;
+//   &:before {
+//     content: "";
+//     position: absolute;
+//     height: 1px;
+//     bottom: 0;
+//     left: 0;
+//     right: 0;
+//     // border: 0 solid #ddd;
+//     // border-bottom-width: 1px;
+//     z-index: -1;
+//   }
+// }
+
+// .nav-menu__container {
+//   max-width: 100%;
+//   flex-wrap: nowrap;
+//   overflow-x: auto;
+//   display: flex;
+//   justify-content: flex-start;
+//   flex-direction: row;
+//   position: relative;
+
+//   &::-webkit-scrollbar {
+//     display: none;
+//   }
+// }
+
+// a.nav-menu__item {
+//   display: inline-block;
+//   padding: 0.8em 1.2em;
+//   font-size: 0.8em;
+//   color: colors.$text-color;
+//   border-bottom: 3px solid transparent;
+//   position: relative;
+
+//   &:hover,
+//   &:active,
+//   &:focus {
+//     // border-bottom-color: colors.$text-color;
+//     // color: colors.$text-color;
+//     // text-decoration: underline;
+//     &:not(.current) {
+//       border-bottom-color: #00000011;
+//     }
+//     // border-bottom-color: black;
+//   }
+
+//   &.current {
+//     // border-color: #ddd;
+//     // border-bottom-color: colors.$bk-color;
+//     border-bottom-color: black;
+//   }
+
+//   span {
+//     margin-left: 0.5em;
+//   }
+// }

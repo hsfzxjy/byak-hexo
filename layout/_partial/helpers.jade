@@ -4,14 +4,27 @@ mixin a_with_current(href, content, id, page)
   if url !== '/'
     - var url = url.slice(1)
 
+  - let extraClasses = []
   if (href == '/' && is_home()) || is_current(url) || (is_post() && (page.categories.toArray()[0] || {}).name == content)
-    a.nav-menu__item.current(href=href)
-      i(class=id)
-      span= content
-  else
-    a.nav-menu__item(href=href)
-      i(class=id)
-      span= content
+    - extraClasses.push("current")
+
+  span(class=["aside__menuList-item__icon", ...extraClasses].join(" "))
+    i(class=id)
+  a(href=href, class=["aside__menuList-item", ...extraClasses].join(" "))
+    span.font__ui(lang="zh")= __(content) + " / " + content
+
+mixin current_section(page)
+  each item in theme.menu
+    - var href = item.directory
+    - var content = item.page
+    - var url = url_for(href)
+
+    if url !== '/'
+      - var url = url.slice(1)
+
+    - let extraClasses = []
+    if (href == '/' && is_home()) || is_current(url) || (is_post() && (page.categories.toArray()[0] || {}).name == content)
+      a(href=href)= content
 
 mixin title(page)
   if page

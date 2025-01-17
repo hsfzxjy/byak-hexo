@@ -1,0 +1,14 @@
+$_main-breakpoint: 45em;
+$_middle-breakpoint: 86em;
+
+@mixin on-small-device {
+  @media screen and (max-width: $_main-breakpoint) {
+    @content;
+  }
+}
+
+@mixin on-middle-device {
+  @media screen and (min-width: $_main-breakpoint) and (max-width: $_middle-breakpoint) {
+    @content;
+  }
+}

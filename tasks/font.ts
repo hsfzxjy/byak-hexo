@@ -40,7 +40,7 @@ async function subsetSingleFont(
   force: boolean,
   unicodeRanges: [start: number, end: number][],
 ) {
-  const fontDestPath = prefixBaseName(fontPath, "slim.")
+  const fontDestPath = prefixBaseName(fontPath, "slim.").replace(/\.[^.]+$/, ".woff2")
 
   if (!force && (await earlierThan(fontPath, fontDestPath))) return
   fancy_log.info("Subsetting", fontPath)
@@ -62,7 +62,10 @@ async function subsetSingleFont(
     await execFile("pyftsubset", [
       `--unicodes-file=${unicodesPath}`,
       fontPath,
+      `--flavor=woff2`,
       `--output-file=${fontDestPath}`,
+      `--ignore-missing-glyphs`,
+      `--no-subset-tables+=FFTM`,
     ])
   } finally {
     await rimraf(tmpdir)
@@ -77,7 +80,7 @@ async function runSubsetFonts(force = true) {
   if (!pyftsubsetAvailable) {
     fancy_log.info("pyftsubset not available, will copy fonts instead of slimming")
     return gulp
-      .src(subsetFontGlob, { ignore: subsetFontGlobIgnored })
+      .src(subsetFontGlob, { ignore: subsetFontGlobIgnored, encoding: false })
       .pipe(
         rename((path: any) => {
           path.basename = "slim." + path.basename
@@ -108,7 +111,7 @@ function watchSubsetFonts() {
 const copyFontGlob = ["source/_fonts/**/icomoon*", "source/_fonts/**/slim.*"]
 
 const copyFonts = namedTask("build:font:copy", () =>
-  gulp.src(copyFontGlob).pipe(gulp.dest(dist("fonts"))),
+  gulp.src(copyFontGlob, { encoding: false }).pipe(gulp.dest(dist("fonts"))),
 )
 
 function watchCopyFonts() {
@@ -118,3 +121,9 @@ function watchCopyFonts() {
 export const watchFont = namedTask("watch:font", gulp.parallel(watchCopyFonts, watchSubsetFonts))
 
 export const buildFont = namedTask("build:font", gulp.series(subsetFonts, copyFonts))
+
+export const cnFont = namedTask("cn:font", () => {
+  return execFile("D:/srcs/fontchan/target/release/fontchan.exe", [
+    "source/_cnfonts/fontchan.config.toml",
+  ])
+})

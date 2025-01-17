@@ -1,23 +1,13 @@
 @media print, screen and (max-width: 479px) {
-  html,
-  body {
-    font-size: 17px !important;
+  :root {
+    // --font-scaling: 1.1;
   }
   #no-comment {
     padding: 15px 15px !important;
     font-size: 0.7em;
   }
 
-  .content_container {
-    padding-right: 0;
-  }
-
   .post {
-    .post__title {
-      padding-top: 2em;
-      text-align: center;
-    }
-
     blockquote {
       margin-left: -12px !important;
       margin-right: -12px !important;
@@ -39,8 +29,8 @@
     }
   }
 
-  div.content_container {
-    padding: 0 12px;
+  .mainContainer {
+    padding: 12px;
   }
 
   #nav-menu {

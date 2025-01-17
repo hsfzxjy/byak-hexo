@@ -1,3 +1,5 @@
+import { docReady } from "./util"
+
 window.MathJax = {
   tex: {
     inlineMath: [["$", "$"]],
@@ -34,7 +36,7 @@ window.MathJax = {
 }
 if ((window as any).__ams) window.MathJax.tex.tags = (window as any).__ams
 
-document.addEventListener("DOMContentLoaded", function () {
+docReady(() => {
   const script = document.createElement("script")
   script.src = "https://cdn.jsdelivr.net/npm/mathjax@4.0.0-beta.4/tex-chtml.js"
   script.async = true

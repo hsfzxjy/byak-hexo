@@ -7,9 +7,7 @@ const KNOWN_PREFIX = "<hexo-enhanced-encrytion></hexo-enhanced-encrytion>"
 function getSalt(seed, nbytes = 16) {
   const seedPrefix = hexo.config.encryption.seed_prefix || "BYAK_RNG"
   const rng = seedrandom(seedPrefix + seed)
-  return Buffer.from(
-    new Uint8Array(Array.from({ length: nbytes }, () => rng.int32()))
-  )
+  return Buffer.from(new Uint8Array(Array.from({ length: nbytes }, () => rng.int32())))
 }
 
 function encryptPost(data) {
@@ -19,8 +17,7 @@ function encryptPost(data) {
   if (encryptionKind === undefined) return
 
   const pwdCfg = hexo.config.encryption.keys[encryptionKind]
-  if (pwdCfg === undefined)
-    throw Error(`unknown encrytion kind ${encryptionKind}`)
+  if (pwdCfg === undefined) throw Error(`unknown encrytion kind ${encryptionKind}`)
 
   const encrypted = (data.encrypted = {
     kind: encryptionKind,
@@ -43,16 +40,12 @@ function encryptPost(data) {
   let cipher = crypto.createCipheriv("aes-256-cbc", key, iv)
   let encryptedData = cipher.update(KNOWN_PREFIX + data.content, "utf8")
   encryptedData = Buffer.concat([encryptedData, cipher.final()])
-  encrypted.composedContent = encrypted.compose(
-    encryptedData.toString("base64")
-  )
+  encrypted.composedContent = encrypted.compose(encryptedData.toString("base64"))
 
   cipher = crypto.createCipheriv("aes-256-cbc", key, iv)
   let encryptedDigest = cipher.update(KNOWN_PREFIX + data.digest, "utf8")
   encryptedDigest = Buffer.concat([encryptedDigest, cipher.final()])
-  encrypted.composedDigest = encrypted.compose(
-    encryptedDigest.toString("base64")
-  )
+  encrypted.composedDigest = encrypted.compose(encryptedDigest.toString("base64"))
 
   data.extra_classes.push("encrypted")
 }

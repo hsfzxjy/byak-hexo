@@ -1,1 +1,22 @@
 @use "../../../node_modules/genko-markdown/web/css/codex.scss";
+
+:root {
+  --gk-code-line-height: 21px;
+}
+
+.hljs {
+  // background: transparent;
+}
+
+.gk-unified-code.row > .gk-tabber:first-child:nth-last-child(4) {
+  justify-self: end;
+}
+
+.hljs {
+  box-shadow:
+    rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
+    rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+  box-shadow:
+    rgba(9, 30, 66, 0.25) 0px 1px 1px,
+    rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+}

@@ -4,21 +4,44 @@ function addCommas(n: number) {
 }
 
 async function jsonp(path: string) {
-  let data
-  try {
-    const response = await fetch(path)
-    data = await response.json()
-    localStorage.setItem(`gh-btn:${path}`, JSON.stringify(data))
-  } catch (_) {
-    data = localStorage.getItem(`gh-btn:${path}`)
-    if (data === null) return
+  const cacheKey = `gh-btn:${path}`
+  const cacheDuration = 3600_000 // 1 hour in milliseconds
+
+  // Try to get cached data
+  const cached = localStorage.getItem(cacheKey)
+  if (cached) {
     try {
-      data = JSON.parse(data)
-    } catch (_) {
-      return
+      const parsedCache = JSON.parse(cached)
+      if (parsedCache.data && parsedCache.timestamp + cacheDuration > Date.now()) {
+        onData(parsedCache.data)
+        return
+      }
+    } catch (error) {
+      console.error("Error parsing cached data:", error)
     }
   }
-  onData(data)
+
+  // Fetch new data
+  try {
+    const response = await fetch(path)
+    const data = await response.json()
+    localStorage.setItem(cacheKey, JSON.stringify({ data, timestamp: Date.now() }))
+    onData(data)
+  } catch (error) {
+    console.error("Error fetching data:", error)
+
+    // Fallback to cached data if available
+    if (cached) {
+      try {
+        const parsedCache = JSON.parse(cached)
+        if (parsedCache.data) {
+          onData(parsedCache.data)
+        }
+      } catch (error) {
+        console.error("Error parsing fallback cached data:", error)
+      }
+    }
+  }
 }
 
 const GH_BUTTON: { username: string } = (window as any).GH_BUTTON
@@ -35,7 +58,6 @@ const type = parameters.get("type")
 const count = parameters.get("count")
 const size = parameters.get("size")
 const noText = parameters.get("text")
-const v = parameters.get("v")
 
 // Elements
 const button = document.querySelector(".gh-btn") as HTMLLinkElement
@@ -48,34 +70,9 @@ const LABEL_SUFFIX = "on GitHub"
 const GITHUB_URL = "https://github.com/"
 const API_URL = "https://api.github.com/"
 const REPO_URL = `${GITHUB_URL + user}/${repo}`
-const USER_REPO = `${user}/${repo}`
 
 function onData(obj: any) {
   switch (type) {
-    case "watch": {
-      if (v === "2") {
-        counter.textContent = obj.subscribers_count && addCommas(obj.subscribers_count)
-        counter.setAttribute("aria-label", `${counter.textContent} watchers ${LABEL_SUFFIX}`)
-      } else {
-        counter.textContent = obj.stargazers_count && addCommas(obj.stargazers_count)
-        counter.setAttribute("aria-label", `${counter.textContent} stargazers ${LABEL_SUFFIX}`)
-      }
-
-      break
-    }
-
-    case "star": {
-      counter.textContent = obj.stargazers_count && addCommas(obj.stargazers_count)
-      counter.setAttribute("aria-label", `${counter.textContent} stargazers ${LABEL_SUFFIX}`)
-      break
-    }
-
-    case "fork": {
-      counter.textContent = obj.network_count && addCommas(obj.network_count)
-      counter.setAttribute("aria-label", `${counter.textContent} forks ${LABEL_SUFFIX}`)
-      break
-    }
-
     case "follow": {
       counter.textContent = obj.followers && addCommas(obj.followers)
       counter.setAttribute("aria-label", `${counter.textContent} followers ${LABEL_SUFFIX}`)
@@ -97,51 +94,11 @@ let title
 
 // Add the class, change the text label, set count link href
 switch (type) {
-  case "watch": {
-    if (v === "2") {
-      mainButton.classList.add("github-watchers")
-      text.textContent = "Watch"
-      counter.href = `${REPO_URL}/watchers`
-    } else {
-      mainButton.classList.add("github-stargazers")
-      text.textContent = "Star"
-      counter.href = `${REPO_URL}/stargazers`
-    }
-
-    title = `${text.textContent} ${USER_REPO}`
-    break
-  }
-
-  case "star": {
-    mainButton.classList.add("github-stargazers")
-    text.textContent = "Star"
-    counter.href = `${REPO_URL}/stargazers`
-    title = `${text.textContent} ${USER_REPO}`
-    break
-  }
-
-  case "fork": {
-    mainButton.classList.add("github-forks")
-    text.textContent = "Fork"
-    button.href = `${REPO_URL}/fork`
-    counter.href = `${REPO_URL}/network`
-    title = `${text.textContent} ${USER_REPO}`
-    break
-  }
-
   case "follow": {
     mainButton.classList.add("github-me")
-    text.textContent = `Follow @${user}`
+    // text.textContent = `FOLLOW ME`
     button.href = GITHUB_URL + user
     counter.href = `${GITHUB_URL + user}?tab=followers`
-    title = text.textContent
-    break
-  }
-
-  case "sponsor": {
-    mainButton.classList.add("github-me")
-    text.textContent = `Sponsor @${user}`
-    button.href = `${GITHUB_URL}sponsors/${user}`
     title = text.textContent
     break
   }

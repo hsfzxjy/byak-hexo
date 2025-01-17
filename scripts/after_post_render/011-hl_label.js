@@ -1,6 +1,5 @@
 const rHLLabelCode = /<code>@#([^`]*?)<\/code>/g
-const rHTag =
-  /<code>@!(i?)((#[0-9a-fA-Z]{6}|%[a-z]+|hsl\(.+\))\s+)?([^`]*?)<\/code>/g
+const rHTag = /<code>@!(i?)((#[0-9a-fA-Z]{6}|%[a-z]+|hsl\(.+\))\s+)?([^`]*?)<\/code>/g
 
 function highlightHLLabel(data) {
   data.content = data.content
